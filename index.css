@@ -127,6 +127,7 @@ img { display: block; max-width: 100%; }
 #header.scrolled { background: #000000; box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .nav-logo { display: flex; align-items: center; gap: 12px; }
+.nav-logo svg path { fill: #FFFFFF !important; }
 .nav-logo img { height: 44px; }
 .nav-logo-text { font-family: var(--font-headline); font-size: 17px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.15; color: var(--offwhite); }
 .nav-links { display: flex; align-items: center; gap: 48px; list-style: none; }
