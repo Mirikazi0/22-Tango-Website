@@ -195,113 +195,147 @@
     .blog-card {
       color: var(--ink);
       border: 3px solid var(--ink);
-      padding: 24px;
+      border-radius: 16px;
       display: flex;
       flex-direction: column;
-      box-shadow: 8px 8px 0 var(--ink);
-      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 5px 5px 0 var(--ink);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background-color: var(--offwhite);
+      overflow: hidden;
     }
     .blog-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 12px 12px 0 var(--ink);
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0 var(--ink);
     }
 
-    /* Alternating Card Background Colors */
-    .card-white { background-color: var(--offwhite); }
-    .card-mint { background-color: var(--mint); }
-    .card-yellow { background-color: var(--yellow); }
-    .card-orange { background-color: var(--orange); }
+    /* Alternating Card Gradient Header Colors */
+    .blog-card-img-1 { background: linear-gradient(135deg, #FF9F5A 0%, var(--orange) 60%, #E0500A 100%); }
+    .blog-card-img-2 { background: linear-gradient(135deg, #EDE6FF 0%, var(--lavender) 60%, #9980F2 100%); }
+    .blog-card-img-3 { background: linear-gradient(135deg, #FFF8B0 0%, var(--yellow) 60%, #E0B800 100%); }
+    .blog-card-img-4 { background: linear-gradient(135deg, #A7F3D0 0%, var(--mint) 60%, #34D399 100%); }
 
     /* Card internal components */
     .card-img-block {
-      border: 3px solid var(--ink);
-      background-color: var(--ink);
+      width: 100%;
       height: 200px;
-      margin-bottom: 20px;
+      border-bottom: 3px solid var(--ink);
       display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
+      align-items: flex-end;
+      padding: 20px 24px;
+      text-decoration: none;
+      transition: filter 0.2s ease;
+    }
+    .card-img-block:hover {
+      filter: brightness(0.93);
     }
     .card-img-placeholder {
-      font-family: var(--font-headline);
-      font-weight: 900;
-      color: var(--offwhite);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 16px;
-      letter-spacing: 0.1em;
-      opacity: 0.85;
+      font-weight: 700;
+      color: var(--ink);
+      background: rgba(255,255,255,0.7);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+    }
+    .card-body-wrapper {
+      padding: 24px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
     }
     .card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
     }
     .card-tag {
-      background-color: var(--ink);
-      color: var(--offwhite);
-      font-family: var(--font-headline);
-      font-size: 9px;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 6px 12px;
-      border: 2px solid var(--ink);
+      color: var(--orange);
+      font-weight: 600;
     }
     .card-date {
       font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #8B6B52;
     }
     .card-title {
       font-family: var(--font-headline);
-      font-size: 20px;
-      font-weight: 800;
-      line-height: 1.2;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.1;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-top: 4px;
     }
     .card-excerpt {
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.75);
-      margin-bottom: 24px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #4A3728;
+      flex: 1;
+      margin-bottom: 8px;
     }
     .card-link {
-      margin-top: auto;
-      font-family: var(--font-headline);
-      font-size: 12px;
-      font-weight: 900;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
+      color: var(--orange);
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      font-weight: 700;
+      margin-top: 8px;
+      align-self: flex-start;
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 2px;
+      text-decoration: none;
+      transition: opacity 0.2s;
     }
     .card-link:hover {
-      text-decoration: underline;
+      opacity: 0.7;
+      text-decoration: none;
     }
 
     /* ─── PAGINATION ─────────────────────────────────────────────── */
     .pagination-container {
       display: flex;
       justify-content: center;
-      gap: 16px;
+      align-items: center;
+      gap: 12px;
       margin-top: 60px;
     }
     .btn-pagination {
       background-color: var(--offwhite);
       box-shadow: 4px 4px 0 var(--ink);
+      border-radius: 8px;
+      font-size: 13px;
+      padding: 10px 18px;
+      min-width: 44px;
+      text-align: center;
     }
-    .btn-pagination:hover {
+    .btn-pagination:hover:not([disabled]) {
       background-color: var(--orange);
       transform: translate(-2px, -2px);
       box-shadow: 6px 6px 0 var(--ink);
+    }
+    .btn-pagination.active {
+      background-color: var(--yellow);
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 var(--ink);
+      pointer-events: none;
+    }
+    .btn-pagination[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: 2px 2px 0 var(--ink);
+      transform: translate(2px, 2px);
     }
 
     /* ─── FOOTER ─────────────────────────────────────────────────── */
@@ -417,96 +451,111 @@
     <div class="container">
       <div class="blog-grid">
         
-        <!-- Post 1 (White Card) -->
-        <article class="blog-card card-white">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">01 / PROCESS</span>
+        <!-- Post 1 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-2">
+            <span class="card-img-placeholder">Creative Process</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Creative Process</span>
-            <span class="card-date">July 02, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Creative Process</span>
+              <span class="card-date">July 02, 2026</span>
+            </div>
+            <h3 class="card-title">Stepping away from the grid</h3>
+            <p class="card-excerpt">Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">Stepping away from the grid</h3>
-          <p class="card-excerpt">Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
-        <!-- Post 2 (Mint Card) -->
-        <article class="blog-card card-mint">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">02 / STUDIO</span>
+        <!-- Post 2 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-1">
+            <span class="card-img-placeholder">Studio Technique</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Studio Technique</span>
-            <span class="card-date">June 28, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Studio Technique</span>
+              <span class="card-date">June 28, 2026</span>
+            </div>
+            <h3 class="card-title">The one mic rule</h3>
+            <p class="card-excerpt">Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">The one mic rule</h3>
-          <p class="card-excerpt">Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
-        <!-- Post 3 (Yellow Card) -->
-        <article class="blog-card card-yellow">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">03 / MENTOR</span>
+        <!-- Post 3 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-3">
+            <span class="card-img-placeholder">Mentorship</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Mentorship</span>
-            <span class="card-date">June 15, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Mentorship</span>
+              <span class="card-date">June 15, 2026</span>
+            </div>
+            <h3 class="card-title">Finding your voice early</h3>
+            <p class="card-excerpt">Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">Finding your voice early</h3>
-          <p class="card-excerpt">Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
-        <!-- Post 4 (Orange Card) -->
-        <article class="blog-card card-orange">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">04 / TRACKS</span>
+        <!-- Post 4 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-1">
+            <span class="card-img-placeholder">Studio Technique</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Studio Technique</span>
-            <span class="card-date">June 02, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Studio Technique</span>
+              <span class="card-date">June 02, 2026</span>
+            </div>
+            <h3 class="card-title">Analog warm harmonics</h3>
+            <p class="card-excerpt">Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">Analog warm harmonics</h3>
-          <p class="card-excerpt">Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
-        <!-- Post 5 (White Card) -->
-        <article class="blog-card card-white">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">05 / PRACTICE</span>
+        <!-- Post 5 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-2">
+            <span class="card-img-placeholder">Creative Process</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Creative Process</span>
-            <span class="card-date">May 24, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Creative Process</span>
+              <span class="card-date">May 24, 2026</span>
+            </div>
+            <h3 class="card-title">Perfect is the blocker</h3>
+            <p class="card-excerpt">Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">Perfect is the blocker</h3>
-          <p class="card-excerpt">Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
-        <!-- Post 6 (Mint Card) -->
-        <article class="blog-card card-mint">
-          <div class="card-img-block">
-            <span class="card-img-placeholder">06 / GROWTH</span>
+        <!-- Post 6 -->
+        <article class="blog-card">
+          <div class="card-img-block blog-card-img-4">
+            <span class="card-img-placeholder">Mentorship</span>
           </div>
-          <div class="card-meta">
-            <span class="card-tag">Mentorship</span>
-            <span class="card-date">May 10, 2026</span>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">Mentorship</span>
+              <span class="card-date">May 10, 2026</span>
+            </div>
+            <h3 class="card-title">Listening as an instrument</h3>
+            <p class="card-excerpt">Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
           </div>
-          <h3 class="card-title">Listening as an instrument</h3>
-          <p class="card-excerpt">Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.</p>
-          <a href="#" class="card-link">Read Note &rarr;</a>
         </article>
 
       </div>
 
       <!-- ⑤ PAGINATION -->
       <div class="pagination-container">
-        <button class="btn btn-pagination">Previous</button>
-        <button class="btn btn-pagination">Next</button>
+        <button class="btn btn-pagination btn-pag-prev" disabled>&larr; Prev</button>
+        <button class="btn btn-pagination active">1</button>
+        <button class="btn btn-pagination">2</button>
+        <button class="btn btn-pagination">3</button>
+        <button class="btn btn-pagination btn-pag-next">Next &rarr;</button>
       </div>
 
     </div>
