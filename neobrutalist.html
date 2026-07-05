@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>22 Tango - Neobrutalist Hero</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #111111;
+    --text-light: #FFFFFF;
+    --yellow: #FFDE59;
+    --pink: #FF66C4;
+    --purple: #8C52FF;
+    --border-dark: #000000;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 5%;
+    border-bottom: 3px solid #333;
+  }
+
+  .logo {
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -1px;
+    color: var(--yellow);
+  }
+
+  .nav-btn {
+    background-color: var(--yellow);
+    color: var(--bg-dark);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border: 3px solid var(--border-dark);
+    box-shadow: 4px 4px 0px var(--pink);
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .nav-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px var(--pink);
+  }
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 100px 5% 120px;
+    position: relative;
+  }
+
+  /* Decorative Sparkles */
+  .sparkle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+  }
+  .s-left { top: 20%; left: 15%; color: var(--yellow); }
+  .s-right { top: 30%; right: 15%; color: var(--pink); }
+
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .highlight {
+    color: var(--bg-dark);
+    background-color: var(--yellow);
+    padding: 0 12px;
+    display: inline-block;
+    border: 4px solid var(--border-dark);
+    transform: rotate(-2deg);
+    box-shadow: 6px 6px 0px var(--purple);
+  }
+
+  .hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin-bottom: 48px;
+    color: #E0E0E0;
+    line-height: 1.6;
+    z-index: 2;
+  }
+
+  /* Notebook Element */
+  .notebook-container {
+    background-color: #FFFFFF;
+    color: var(--bg-dark);
+    width: 100%;
+    max-width: 800px;
+    border: 4px solid var(--border-dark);
+    border-radius: 8px;
+    position: relative;
+    padding: 40px 30px;
+    box-shadow: 12px 12px 0px var(--pink);
+    text-align: left;
+    margin-top: 20px;
+  }
+
+  /* Binder Holes */
+  .binder-holes {
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+  }
+
+  .hole {
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-dark);
+    border-radius: 50%;
+    border: 3px solid var(--border-dark);
+  }
+
+  .handwriting {
+    font-family: 'Permanent Marker', cursive;
+    color: var(--purple);
+    font-size: 24px;
+    margin-bottom: 16px;
+    transform: rotate(-1deg);
+  }
+
+  .notebook-container h2 {
+    font-size: 32px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .notebook-container p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 0;
+    max-width: 100%;
+  }
+
+  /* SVG Icons */
+  svg {
+    fill: currentColor;
+  }
+
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">22 TANGO</div>
+    <a href="#" class="nav-btn">Enroll Now</a>
+  </header>
+
+  <section class="hero">
+    <!-- Star SVGs -->
+    <svg class="sparkle s-left" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"/></svg>
+    <svg class="sparkle s-right" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5L24 12l-9.5 2.5L12 24l-2.5-9.5L0 12l9.5-2.5z"/></svg>
+
+    <h1>We Replace The Pressure Of The Stage With <span class="highlight">The Craft</span> Of The Studio.</h1>
+    <p>A process-driven creative school for beginners and emerging artists who are ready to build — not perform.</p>
+
+    <!-- Notebook UI Component -->
+    <div class="notebook-container">
+      <div class="binder-holes">
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+        <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+      </div>
+      <div class="handwriting">Step inside the booth.</div>
+      <h2>The Studio Artifact</h2>
+      <p>Instead of a public recital, you leave this school with a professional studio recording. Your private milestone. Proof to yourself — not to anyone else.</p>
+    </div>
+  </section>
+
+</body>
+</html>

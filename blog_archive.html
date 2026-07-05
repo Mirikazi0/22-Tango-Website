@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes on Creative Practice — 22 Tango Blog</title>
+  <!-- Google Fonts: Unbounded (Headings), Inter (Body), IBM Plex Mono (Dates/Metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ─── NEOBRUTALIST DESIGN SYSTEM ───────────────────────────── */
+    :root {
+      --bg-dark: #1A1209;
+      --offwhite: #FFF9F2;
+      --yellow: #FFDE59;
+      --pink: #FF66C4;
+      --purple: #8C52FF;
+      --lavender: #E8D3FF;
+      --mint: #79F2C0;
+      --orange: #FF8F3D;
+      --ink: #000000;
+      --font-headline: 'Unbounded', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--offwhite);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Common layout container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── HEADER / NAVIGATION ───────────────────────────────────── */
+    #header {
+      background-color: var(--ink);
+      border-bottom: 3px solid var(--ink);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 16px 0;
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      color: var(--offwhite);
+      text-decoration: none;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover {
+      color: var(--yellow);
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 3px solid var(--ink);
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .btn-nav {
+      background-color: var(--yellow);
+      border-radius: 50px;
+      box-shadow: 3px 3px 0 var(--offwhite);
+    }
+    .btn-nav:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--offwhite);
+    }
+
+    /* ─── HERO / TITLE SECTION ───────────────────────────────────── */
+    #hero {
+      background-color: var(--lavender);
+      color: var(--ink);
+      padding: 100px 0 140px; /* High bottom padding to clear the zigzag overlap */
+      position: relative;
+      text-align: center;
+    }
+    .hero-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero-subhead {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 500;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Flat downward torn-receipt zigzag edge */
+    #hero::after {
+      content: "";
+      position: absolute;
+      bottom: -1px; /* Align to the pixel line */
+      left: 0;
+      width: 100%;
+      height: 32px;
+      background-image: 
+        linear-gradient(45deg, var(--bg-dark) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--bg-dark) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--bg-dark) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--bg-dark) 75%);
+      background-size: 40px 64px;
+      background-position: 0 0, 20px 0, 20px -32px, 0px -32px;
+      z-index: 5;
+    }
+
+    /* ─── CATEGORY FILTER BAR ────────────────────────────────────── */
+    #filter-bar {
+      padding: 60px 0 20px;
+      background-color: var(--bg-dark);
+    }
+    .filter-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+    .filter-tag {
+      background-color: var(--offwhite);
+      color: var(--ink);
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 3px solid var(--ink);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .filter-tag:hover, .filter-tag.active {
+      background-color: var(--mint);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    /* ─── THE BLOG GRID ──────────────────────────────────────────── */
+    #blog-grid-section {
+      background-color: var(--bg-dark);
+      padding: 40px 0 80px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Neobrutalist Cards */
+    .blog-card {
+      color: var(--ink);
+      border: 3px solid var(--ink);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 8px 8px 0 var(--ink);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .blog-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 12px 12px 0 var(--ink);
+    }
+
+    /* Alternating Card Background Colors */
+    .card-white { background-color: var(--offwhite); }
+    .card-mint { background-color: var(--mint); }
+    .card-yellow { background-color: var(--yellow); }
+    .card-orange { background-color: var(--orange); }
+
+    /* Card internal components */
+    .card-img-block {
+      border: 3px solid var(--ink);
+      background-color: var(--ink);
+      height: 200px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .card-img-placeholder {
+      font-family: var(--font-headline);
+      font-weight: 900;
+      color: var(--offwhite);
+      text-transform: uppercase;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      opacity: 0.85;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .card-tag {
+      background-color: var(--ink);
+      color: var(--offwhite);
+      font-family: var(--font-headline);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border: 2px solid var(--ink);
+    }
+    .card-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .card-title {
+      font-family: var(--font-headline);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .card-excerpt {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.75);
+      margin-bottom: 24px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-link {
+      margin-top: auto;
+      font-family: var(--font-headline);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .card-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── PAGINATION ─────────────────────────────────────────────── */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 60px;
+    }
+    .btn-pagination {
+      background-color: var(--offwhite);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .btn-pagination:hover {
+      background-color: var(--orange);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    #footer {
+      background-color: var(--ink);
+      color: var(--offwhite);
+      padding: 48px 0;
+      border-top: 3px solid var(--ink);
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-headline);
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: -0.05em;
+    }
+    .footer-logo span {
+      color: var(--yellow);
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* ─── RESPONSIVE MEDIA QUERIES ───────────────────────────────── */
+    @media (max-width: 1024px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none; /* simple wireframe responsive collapse */
+      }
+      .hero-headline {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ① HEADER / NAVIGATION -->
+  <header id="header">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo" aria-label="22 Tango Home">
+          <!-- Stark white wireframe header logo -->
+          <svg height="28" viewBox="0 0 781 253" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: #FFFFFF;">
+            <path d="M81.2815 0.311069C89.087 -0.912668 101.395 1.67356 108.534 4.59086C154.229 23.2632 156.738 75.2514 131.162 111.88C124.704 121.387 116.64 129.679 109.323 138.397C100.791 148.56 92.1204 158.688 83.5695 168.799C81.6414 171.079 69.4812 184.681 68.889 186.277L123.68 186.357C134.889 186.359 147.794 186.665 158.883 186.261C158.567 188.546 158.66 192.893 158.66 195.297L158.675 210.18C158.69 223.907 158.359 238.871 158.742 252.484C156.555 252.037 150.491 252.211 147.896 252.216L127.195 252.252L47.4871 252.248C42.6692 252.25 0.863514 252.42 0 251.971C0.00623378 251.811 0.0127385 251.651 0.0189723 251.491C5.21713 245.054 18.7688 229.472 23.3439 224.037L42.1463 202.062C43.0912 200.955 44.7949 199.644 45.6183 198.609C48.3397 195.186 51.4859 191.173 54.3702 187.905C69.2554 171.061 83.9457 154.046 98.4387 136.864L110.596 122.759C113.755 119.137 120.367 111.766 122.406 107.68C119.735 109.738 116.608 112.258 113.602 113.78C75.0775 133.287 26.9785 108.452 24.7478 64.2018C23.033 30.1842 47.1483 2.5618 81.2815 0.311069Z" fill="#FFFFFF"/>
+            <path d="M256.147 0.335833C287.199 -2.72653 318.024 21.9621 321.688 52.7064C324.098 72.9354 317.666 95.0408 306.101 111.689C295.341 127.182 281.432 140.604 269.772 155.415C268.674 156.811 267.051 158.035 266.099 159.279C259.058 168.478 250.686 176.78 243.753 186.122L243.907 186.303L301.166 186.386C311.834 186.389 323.122 186.565 333.741 186.328C332.687 194.845 334.508 250.128 333.053 252.116C331.646 252.66 231.649 252.27 222.869 252.271L179.353 252.149C178.05 252.134 175.922 252.542 174.883 251.879C175.046 250.613 207.219 213.467 210.932 209.107L229.754 187.312C230.136 186.874 233.16 184.028 233.213 183.919C234.653 180.928 236.925 179.147 238.993 176.726C243.2 171.808 247.3 166.73 251.805 162.096C252.664 161.212 253.174 159.921 253.976 158.983C258.673 154.107 263.028 148.76 267.333 143.53C268.333 142.233 270.065 141.1 271.024 139.828C279.312 128.835 289.82 119.397 297.214 107.742C294.65 109.316 292.325 111.562 289.679 113.03C268.362 124.857 239.169 122.454 220.633 106.54C180.003 71.6579 200.916 3.54334 256.147 0.335833Z" fill="#FFFFFF"/>
+          </svg>
+        </a>
+        <nav class="nav-links">
+          <a href="#">Programs</a>
+          <a href="#">About</a>
+          <a href="#">Notes</a>
+          <a href="#">FAQ</a>
+        </nav>
+        <a href="#" class="btn btn-nav">Enroll Now →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ② HERO / TITLE SECTION -->
+  <section id="hero">
+    <div class="container">
+      <h1 class="hero-headline">Notes on Creative Practice</h1>
+      <p class="hero-subhead">Thoughts on process, craft, and leaving perfection at the door.</p>
+    </div>
+  </section>
+
+  <!-- ③ CATEGORY FILTER BAR -->
+  <section id="filter-bar">
+    <div class="container">
+      <div class="filter-wrapper">
+        <button class="filter-tag active">All Notes</button>
+        <button class="filter-tag">Creative Process</button>
+        <button class="filter-tag">Mentorship</button>
+        <button class="filter-tag">Studio Technique</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ④ THE BLOG GRID -->
+  <main id="blog-grid-section">
+    <div class="container">
+      <div class="blog-grid">
+        
+        <!-- Post 1 (White Card) -->
+        <article class="blog-card card-white">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">01 / PROCESS</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Creative Process</span>
+            <span class="card-date">July 02, 2026</span>
+          </div>
+          <h3 class="card-title">Stepping away from the grid</h3>
+          <p class="card-excerpt">Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+        <!-- Post 2 (Mint Card) -->
+        <article class="blog-card card-mint">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">02 / STUDIO</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Studio Technique</span>
+            <span class="card-date">June 28, 2026</span>
+          </div>
+          <h3 class="card-title">The one mic rule</h3>
+          <p class="card-excerpt">Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+        <!-- Post 3 (Yellow Card) -->
+        <article class="blog-card card-yellow">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">03 / MENTOR</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Mentorship</span>
+            <span class="card-date">June 15, 2026</span>
+          </div>
+          <h3 class="card-title">Finding your voice early</h3>
+          <p class="card-excerpt">Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+        <!-- Post 4 (Orange Card) -->
+        <article class="blog-card card-orange">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">04 / TRACKS</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Studio Technique</span>
+            <span class="card-date">June 02, 2026</span>
+          </div>
+          <h3 class="card-title">Analog warm harmonics</h3>
+          <p class="card-excerpt">Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+        <!-- Post 5 (White Card) -->
+        <article class="blog-card card-white">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">05 / PRACTICE</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Creative Process</span>
+            <span class="card-date">May 24, 2026</span>
+          </div>
+          <h3 class="card-title">Perfect is the blocker</h3>
+          <p class="card-excerpt">Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+        <!-- Post 6 (Mint Card) -->
+        <article class="blog-card card-mint">
+          <div class="card-img-block">
+            <span class="card-img-placeholder">06 / GROWTH</span>
+          </div>
+          <div class="card-meta">
+            <span class="card-tag">Mentorship</span>
+            <span class="card-date">May 10, 2026</span>
+          </div>
+          <h3 class="card-title">Listening as an instrument</h3>
+          <p class="card-excerpt">Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.</p>
+          <a href="#" class="card-link">Read Note &rarr;</a>
+        </article>
+
+      </div>
+
+      <!-- ⑤ PAGINATION -->
+      <div class="pagination-container">
+        <button class="btn btn-pagination">Previous</button>
+        <button class="btn btn-pagination">Next</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ⑥ FOOTER -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-logo">22 Tango<span> School</span></div>
+      <p class="footer-copy">&copy; 2026 22 Tango Creative School. Made for the craft.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
