@@ -449,113 +449,16 @@
   <!-- ④ THE BLOG GRID -->
   <main id="blog-grid-section">
     <div class="container">
-      <div class="blog-grid">
-        
-        <!-- Post 1 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-2">
-            <span class="card-img-placeholder">Creative Process</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Creative Process</span>
-              <span class="card-date">July 02, 2026</span>
-            </div>
-            <h3 class="card-title">Stepping away from the grid</h3>
-            <p class="card-excerpt">Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
-        <!-- Post 2 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-1">
-            <span class="card-img-placeholder">Studio Technique</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Studio Technique</span>
-              <span class="card-date">June 28, 2026</span>
-            </div>
-            <h3 class="card-title">The one mic rule</h3>
-            <p class="card-excerpt">Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
-        <!-- Post 3 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-3">
-            <span class="card-img-placeholder">Mentorship</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Mentorship</span>
-              <span class="card-date">June 15, 2026</span>
-            </div>
-            <h3 class="card-title">Finding your voice early</h3>
-            <p class="card-excerpt">Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
-        <!-- Post 4 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-1">
-            <span class="card-img-placeholder">Studio Technique</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Studio Technique</span>
-              <span class="card-date">June 02, 2026</span>
-            </div>
-            <h3 class="card-title">Analog warm harmonics</h3>
-            <p class="card-excerpt">Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
-        <!-- Post 5 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-2">
-            <span class="card-img-placeholder">Creative Process</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Creative Process</span>
-              <span class="card-date">May 24, 2026</span>
-            </div>
-            <h3 class="card-title">Perfect is the blocker</h3>
-            <p class="card-excerpt">Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
-        <!-- Post 6 -->
-        <article class="blog-card">
-          <div class="card-img-block blog-card-img-4">
-            <span class="card-img-placeholder">Mentorship</span>
-          </div>
-          <div class="card-body-wrapper">
-            <div class="card-meta">
-              <span class="card-tag">Mentorship</span>
-              <span class="card-date">May 10, 2026</span>
-            </div>
-            <h3 class="card-title">Listening as an instrument</h3>
-            <p class="card-excerpt">Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
-          </div>
-        </article>
-
+      <div class="blog-grid" id="blog-grid">
+        <!-- Posts will be dynamically loaded here by JS -->
+        <div class="loading-state" style="grid-column: 1 / -1; text-align: center; color: var(--offwhite); font-family: var(--font-mono); padding: 40px 0;">
+          Loading notes...
+        </div>
       </div>
 
       <!-- ⑤ PAGINATION -->
-      <div class="pagination-container">
-        <button class="btn btn-pagination btn-pag-prev" disabled>&larr; Prev</button>
-        <button class="btn btn-pagination active">1</button>
-        <button class="btn btn-pagination">2</button>
-        <button class="btn btn-pagination">3</button>
-        <button class="btn btn-pagination btn-pag-next">Next &rarr;</button>
+      <div class="pagination-container" id="pagination-nav">
+        <!-- Pagination links will be populated dynamically -->
       </div>
 
     </div>
@@ -623,6 +526,288 @@
       </div>
     </div>
   </footer>
+
+  <!-- DYNAMIC POST LOADER JS -->
+  <script>
+    // Configuration
+    const POSTS_DIR = 'content/blog/';
+    const POSTS_PER_PAGE = 6;
+    let blogPosts = [];
+    let currentCategory = 'All Notes';
+    let currentPage = 1;
+
+    // List of static mock posts to fall back on if dynamic fetch fails or is empty
+    const mockPosts = [
+      {
+        title: "Stepping away from the grid",
+        date: "2026-07-02",
+        category: "Creative Process",
+        color: "yellow",
+        excerpt: "Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.",
+        body: ""
+      },
+      {
+        title: "The one mic rule",
+        date: "2026-06-28",
+        category: "Studio Technique",
+        color: "orange",
+        excerpt: "Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.",
+        body: ""
+      },
+      {
+        title: "Finding your voice early",
+        date: "2026-06-15",
+        category: "Mentorship",
+        color: "mint",
+        excerpt: "Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.",
+        body: ""
+      },
+      {
+        title: "Analog warm harmonics",
+        date: "2026-06-02",
+        category: "Studio Technique",
+        color: "white",
+        excerpt: "Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.",
+        body: ""
+      },
+      {
+        title: "Perfect is the blocker",
+        date: "2026-05-24",
+        category: "Creative Process",
+        color: "orange",
+        excerpt: "Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.",
+        body: ""
+      },
+      {
+        title: "Listening as an instrument",
+        date: "2026-05-10",
+        category: "Mentorship",
+        color: "yellow",
+        excerpt: "Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.",
+        body: ""
+      }
+    ];
+
+    // Helper: Parse YAML frontmatter from markdown file text
+    function parseMarkdown(mdText) {
+      const match = mdText.match(/^---([\s\S]*?)---/);
+      if (!match) return null;
+      
+      const frontmatterText = match[1];
+      const lines = frontmatterText.split('\n');
+      const data = {};
+      
+      lines.forEach(line => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+          const key = parts[0].trim();
+          const value = parts.slice(1).join(':').trim().replace(/^["']|["']$/g, ''); // strip quotes
+          data[key] = value;
+        }
+      });
+      return data;
+    }
+
+    // Load posts from GitHub contents API dynamically
+    async function fetchPosts() {
+      const grid = document.getElementById('blog-grid');
+      try {
+        // Fetch repo contents for content/blog folder
+        const response = await fetch('https://api.github.com/repos/Mirikazi0/22-Tango-Website/contents/content/blog');
+        if (!response.ok) throw new Error('Repository directory fetch failed');
+        
+        const files = await response.json();
+        const mdFiles = files.filter(f => f.name.endsWith('.md'));
+        
+        if (mdFiles.length === 0) {
+          blogPosts = mockPosts;
+          renderPosts();
+          return;
+        }
+
+        // Fetch each markdown file content
+        const postPromises = mdFiles.map(async (file) => {
+          const fileRes = await fetch(file.download_url);
+          const text = await fileRes.text();
+          const parsed = parseMarkdown(text);
+          if (parsed) {
+            return {
+              title: parsed.title || 'Untitled Post',
+              date: parsed.date || '2026-07-01',
+              category: parsed.category || 'Creative Practice',
+              color: parsed.color || 'white',
+              image: parsed.image || '',
+              excerpt: parsed.excerpt || text.replace(/^---[\s\S]*?---/, '').substring(0, 150) + '...',
+              body: text.replace(/^---[\s\S]*?---/, '')
+            };
+          }
+          return null;
+        });
+
+        const fetched = await Promise.all(postPromises);
+        blogPosts = fetched.filter(p => p !== null);
+        
+        // Sort posts descending by date
+        blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // If no posts were parsed, fallback to mock data
+        if (blogPosts.length === 0) {
+          blogPosts = mockPosts;
+        }
+        
+      } catch (err) {
+        console.warn("Failed fetching from GitHub API, falling back to mock posts:", err);
+        blogPosts = mockPosts;
+      }
+      
+      renderPosts();
+    }
+
+    // Format Dates nicely (e.g. July 02, 2026)
+    function formatDate(dateStr) {
+      try {
+        const options = { year: 'numeric', month: 'long', day: '2-digit' };
+        return new Date(dateStr).toLocaleDateString('en-US', options);
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    // Render current selection to grid
+    function renderPosts() {
+      const grid = document.getElementById('blog-grid');
+      grid.innerHTML = '';
+
+      // Filter by category
+      const filtered = blogPosts.filter(post => {
+        return currentCategory === 'All Notes' || post.category.toLowerCase() === currentCategory.toLowerCase();
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:60px 0; color:var(--offwhite); font-family:var(--font-mono);">No posts found in this category.</div>`;
+        document.getElementById('pagination-nav').innerHTML = '';
+        return;
+      }
+
+      // Calculate Pagination
+      const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+      const paginated = filtered.slice(startIndex, startIndex + POSTS_PER_PAGE);
+      const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+
+      // Render Cards
+      paginated.forEach(post => {
+        const card = document.createElement('article');
+        card.className = 'blog-card';
+
+        // Select background style class or use image background
+        let imgBlockStyle = '';
+        if (post.image) {
+          // If image path doesn't start with http, prepend leading slash if needed
+          const imgSrc = post.image.startsWith('http') || post.image.startsWith('assets') || post.image.startsWith('/assets')
+            ? post.image 
+            : `/content/blog/${post.image}`;
+          imgBlockStyle = `style="background-image: url('${imgSrc}'); background-size: cover; background-position: center;"`;
+        } else {
+          // Color fallback gradients mapping to color key
+          const colorClassMap = {
+            'orange': 'blog-card-img-1',
+            'lavender': 'blog-card-img-2',
+            'yellow': 'blog-card-img-3',
+            'mint': 'blog-card-img-4',
+            'white': 'blog-card-img-2'
+          };
+          const colorClass = colorClassMap[post.color.toLowerCase()] || 'blog-card-img-2';
+          card.querySelector('.card-img-block')?.classList.add(colorClass);
+        }
+
+        const fallbackColorClass = {
+          'orange': 'blog-card-img-1',
+          'lavender': 'blog-card-img-2',
+          'yellow': 'blog-card-img-3',
+          'mint': 'blog-card-img-4',
+          'white': 'blog-card-img-2'
+        }[post.color.toLowerCase()] || 'blog-card-img-2';
+
+        card.innerHTML = `
+          <div class="card-img-block ${post.image ? '' : fallbackColorClass}" ${imgBlockStyle}>
+            <span class="card-img-placeholder">${post.category}</span>
+          </div>
+          <div class="card-body-wrapper">
+            <div class="card-meta">
+              <span class="card-tag">${post.category}</span>
+              <span class="card-date">${formatDate(post.date)}</span>
+            </div>
+            <h3 class="card-title">${post.title}</h3>
+            <p class="card-excerpt">${post.excerpt}</p>
+            <a href="#" class="card-link">Read Note &rarr;</a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      renderPagination(totalPages);
+    }
+
+    // Render pagination controls
+    function renderPagination(totalPages) {
+      const nav = document.getElementById('pagination-nav');
+      if (totalPages <= 1) {
+        nav.innerHTML = '';
+        return;
+      }
+
+      let html = `<button class="btn btn-pagination btn-pag-prev" ${currentPage === 1 ? 'disabled' : ''}>&larr; Prev</button>`;
+      
+      for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="btn btn-pagination ${currentPage === i ? 'active' : ''}">${i}</button>`;
+      }
+
+      html += `<button class="btn btn-pagination btn-pag-next" ${currentPage === totalPages ? 'disabled' : ''}>Next &rarr;</button>`;
+      
+      nav.innerHTML = html;
+
+      // Event Listeners for pagination buttons
+      nav.querySelectorAll('.btn-pagination').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.classList.contains('btn-pag-prev')) {
+            if (currentPage > 1) {
+              currentPage--;
+              renderPosts();
+              window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+            }
+          } else if (btn.classList.contains('btn-pag-next')) {
+            if (currentPage < totalPages) {
+              currentPage++;
+              renderPosts();
+              window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+            }
+          } else {
+            currentPage = parseInt(btn.textContent);
+            renderPosts();
+            window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+          }
+        });
+      });
+    }
+
+    // Event Listeners for category filter buttons
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        tag.classList.add('active');
+        
+        currentCategory = tag.textContent;
+        currentPage = 1;
+        renderPosts();
+      });
+    });
+
+    // Boot
+    window.addEventListener('DOMContentLoaded', fetchPosts);
+  </script>
+
+</body>
+</html>
 
 </body>
 </html>
