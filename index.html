@@ -340,47 +340,13 @@
           <a href="blog_archive.html" class="blog-view-all" id="blog-view-all-cta">Explore all notes →</a>
         </div>
 
-        <!-- Card 1 -->
-        <article class="blog-post-card reveal" id="blog-card-1">
-          <a href="blog_archive.html" class="blog-card-image blog-card-img-1" id="blog-img-link-1" aria-label="Read: The Courage to Make a Bad First Draft">
-            <span class="blog-card-img-label">Creative Process</span>
-          </a>
-          <div class="blog-card-body">
-            <span class="blog-card-cat">Creative Process</span>
-            <div class="blog-card-date">July 2026</div>
-            <h3 class="blog-card-headline">The Courage to Make a Bad First Draft</h3>
-            <p class="blog-card-excerpt">Why permission to create poorly at the start is the most vital tool in any songwriter or producer's arsenal. Nurturing a safe space for raw ideas.</p>
-            <a href="blog_archive.html" class="blog-card-arrow" id="blog-link-draft">Read Note <span>→</span></a>
+        <!-- Container to load latest 3 posts dynamically -->
+        <div class="blog-posts-wrapper" id="index-blog-container" style="display: contents;">
+          <!-- Loading state placeholder -->
+          <div style="grid-column: 1 / -1; text-align: center; color: var(--offwhite); font-family: var(--font-mono); padding: 40px 0;">
+            Loading latest notes...
           </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="blog-post-card reveal" id="blog-card-2">
-          <a href="blog_archive.html" class="blog-card-image blog-card-img-2" id="blog-img-link-2" aria-label="Read: Depth Over Speed">
-            <span class="blog-card-img-label">Mentorship</span>
-          </a>
-          <div class="blog-card-body">
-            <span class="blog-card-cat">Mentorship</span>
-            <div class="blog-card-date">June 2026</div>
-            <h3 class="blog-card-headline">Depth Over Speed: Nurturing Lifelong Skill</h3>
-            <p class="blog-card-excerpt">Moving away from the pressure of instant recitals to support meaningful connection with your instrument. Our philosophy behind PML.</p>
-            <a href="blog_archive.html" class="blog-card-arrow" id="blog-link-depth">Read Note <span>→</span></a>
-          </div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="blog-post-card reveal" id="blog-card-3">
-          <a href="blog_archive.html" class="blog-card-image blog-card-img-3" id="blog-img-link-3" aria-label="Read: Demystifying the Studio Environment">
-            <span class="blog-card-img-label">Recording Arts</span>
-          </a>
-          <div class="blog-card-body">
-            <span class="blog-card-cat">Recording Arts</span>
-            <div class="blog-card-date">May 2026</div>
-            <h3 class="blog-card-headline">Demystifying the Studio Environment</h3>
-            <p class="blog-card-excerpt">How tracking your own original song structure inside a high-fidelity studio serves as the ultimate creative milestone, leaving stage fright behind.</p>
-            <a href="blog_archive.html" class="blog-card-arrow" id="blog-link-studio">Read Note <span>→</span></a>
-          </div>
-        </article>
+        </div>
 
         <!-- Full-width CTA -->
         <div class="blog-cta-row">
@@ -633,6 +599,143 @@
         }
       });
     });
+
+    // ─── DYNAMIC BLOG CARD LOADER ──────────────────────────
+    const mockLandingPosts = [
+      {
+        title: "The Courage to Make a Bad First Draft",
+        date: "2026-07-02",
+        category: "Creative Process",
+        color: "orange",
+        excerpt: "Why permission to create poorly at the start is the most vital tool in any songwriter or producer's arsenal. Nurturing a safe space for raw ideas.",
+      },
+      {
+        title: "Depth Over Speed: Nurturing Lifelong Skill",
+        date: "2026-06-28",
+        category: "Mentorship",
+        color: "lavender",
+        excerpt: "Moving away from the pressure of instant recitals to support meaningful connection with your instrument. Our philosophy behind PML.",
+      },
+      {
+        title: "Demystifying the Studio Environment",
+        date: "2026-06-15",
+        category: "Recording Arts",
+        color: "yellow",
+        excerpt: "How tracking your own original song structure inside a high-fidelity studio serves as the ultimate creative milestone, leaving stage fright behind.",
+      }
+    ];
+
+    function parseYAML(mdText) {
+      const match = mdText.match(/^---([\s\S]*?)---/);
+      if (!match) return null;
+      const data = {};
+      match[1].split('\n').forEach(line => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+          data[parts[0].trim()] = parts.slice(1).join(':').trim().replace(/^["']|["']$/g, '');
+        }
+      });
+      return data;
+    }
+
+    async function loadLandingPosts() {
+      const container = document.getElementById('index-blog-container');
+      if (!container) return;
+
+      try {
+        const res = await fetch('https://api.github.com/repos/Mirikazi0/22-Tango-Website/contents/content/blog');
+        if (!res.ok) throw new Error();
+        
+        const files = await res.json();
+        const mdFiles = files.filter(f => f.name.endsWith('.md')).slice(0, 3);
+        
+        if (mdFiles.length === 0) {
+          renderLandingPosts(mockLandingPosts);
+          return;
+        }
+
+        const promises = mdFiles.map(async (file) => {
+          const fileRes = await fetch(file.download_url);
+          const text = await fileRes.text();
+          const meta = parseYAML(text);
+          if (meta) {
+            return {
+              title: meta.title || 'Untitled Note',
+              date: meta.date || '2026-07-01',
+              category: meta.category || 'Creative Practice',
+              color: meta.color || 'white',
+              image: meta.image || '',
+              excerpt: meta.excerpt || text.replace(/^---[\s\S]*?---/, '').substring(0, 140) + '...'
+            };
+          }
+          return null;
+        });
+
+        const posts = (await Promise.all(promises)).filter(p => p !== null);
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        renderLandingPosts(posts.length > 0 ? posts : mockLandingPosts);
+
+      } catch (err) {
+        renderLandingPosts(mockLandingPosts);
+      }
+    }
+
+    function renderLandingPosts(posts) {
+      const container = document.getElementById('index-blog-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      
+      posts.forEach((post, index) => {
+        const article = document.createElement('article');
+        article.className = 'blog-post-card reveal';
+        
+        // Setup Date string
+        let dateStr = "July 2026";
+        try {
+          const d = new Date(post.date);
+          dateStr = `${months[d.getMonth()]} ${d.getFullYear()}`;
+        } catch (e) {}
+
+        const colorMap = {
+          'orange': 'blog-card-img-1',
+          'lavender': 'blog-card-img-2',
+          'yellow': 'blog-card-img-3',
+          'mint': 'blog-card-img-4',
+          'white': 'blog-card-img-2'
+        };
+        const colorClass = colorMap[post.color.toLowerCase()] || 'blog-card-img-2';
+        
+        let imgStyle = "";
+        if (post.image) {
+          const imgSrc = post.image.startsWith('http') || post.image.startsWith('assets') || post.image.startsWith('/assets')
+            ? post.image 
+            : `/content/blog/${post.image}`;
+          imgStyle = `style="background-image: url('${imgSrc}'); background-size: cover; background-position: center;"`;
+        }
+
+        article.innerHTML = `
+          <a href="blog_archive.html" class="blog-card-image ${post.image ? '' : colorClass}" ${imgStyle} aria-label="Read: ${post.title}">
+            <span class="blog-card-img-label">${post.category}</span>
+          </a>
+          <div class="blog-card-body">
+            <span class="blog-card-cat">${post.category}</span>
+            <div class="blog-card-date">${dateStr}</div>
+            <h3 class="blog-card-headline">${post.title}</h3>
+            <p class="blog-card-excerpt">${post.excerpt}</p>
+            <a href="blog_archive.html" class="blog-card-arrow">Read Note <span>→</span></a>
+          </div>
+        `;
+        container.appendChild(article);
+        
+        // Re-observe for reveal scroll animation
+        observer.observe(article);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', loadLandingPosts);
   </script>
 </body>
 </html>
