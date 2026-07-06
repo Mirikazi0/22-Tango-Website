@@ -7,3 +7,9 @@ color: white
 excerpt: A guide to unlocking focus and setting up your studio workspace
 ---
 Hello world
+
+
+
+![With the bous](/assets/uploads/photo-10-11-25-2-30-24-pm.jpg "With the bous")
+
+A guide to unlocking focus and setting up your studio workspace
