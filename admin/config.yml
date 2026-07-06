@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Mirikazi0/22-Tango-Website
   branch: main # Change to master if your primary git branch is master
-  base_url: https://decap-cms-oauth-kohl.vercel.app
+  base_url: https://decap-cms-oauth-server.vercel.app
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
