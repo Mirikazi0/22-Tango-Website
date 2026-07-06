@@ -381,6 +381,127 @@
         font-size: 36px;
       }
     }
+
+    /* ─── DYNAMIC POST VIEW MODAL ───────────────────────── */
+    #post-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(26, 18, 9, 0.95);
+      z-index: 1000;
+      display: none; /* Controlled by JS */
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-container {
+      background-color: var(--offwhite);
+      border: 4px solid var(--ink);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 10px 10px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .modal-header {
+      padding: 28px 40px;
+      border-bottom: 4px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: sticky;
+      top: 0;
+      background-color: var(--offwhite);
+      z-index: 10;
+    }
+    .modal-header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .modal-category {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ink);
+      align-self: flex-start;
+      background: var(--yellow);
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 2px solid var(--ink);
+    }
+    .modal-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      opacity: 0.6;
+    }
+    .modal-title {
+      font-family: var(--font-headline);
+      font-size: clamp(20px, 4vw, 32px);
+      line-height: 1.2;
+      margin-top: 12px;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
+    .modal-close-btn {
+      background: var(--pink);
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .modal-close-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .modal-body {
+      padding: 40px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink);
+    }
+    .modal-body p {
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+    .modal-body h2, .modal-body h3 {
+      font-family: var(--font-headline);
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-top: 40px;
+      margin-bottom: 16px;
+    }
+    .modal-body h2 { font-size: 22px; }
+    .modal-body h3 { font-size: 18px; }
+    .modal-body img {
+      max-width: 100%;
+      border: 3px solid var(--ink);
+      border-radius: 12px;
+      margin: 24px 0;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .modal-body blockquote {
+      border-left: 6px solid var(--orange);
+      padding-left: 20px;
+      margin: 24px 0;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -463,6 +584,23 @@
 
     </div>
   </main>
+
+  <!-- DYNAMIC POST VIEW MODAL -->
+  <div id="post-modal" role="dialog" aria-modal="true" aria-labelledby="modal-post-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-meta">
+          <span class="modal-category" id="modal-post-category">Category</span>
+          <span class="modal-date" id="modal-post-date">Date</span>
+          <h2 class="modal-title" id="modal-post-title">Post Title</h2>
+        </div>
+        <button class="modal-close-btn" id="modal-close" aria-label="Close details">×</button>
+      </div>
+      <div class="modal-body" id="modal-post-body">
+        <!-- Markdown content rendered here -->
+      </div>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer id="footer" role="contentinfo">
@@ -739,14 +877,85 @@
             </div>
             <h3 class="card-title">${post.title}</h3>
             <p class="card-excerpt">${post.excerpt}</p>
-            <a href="#" class="card-link">Read Note &rarr;</a>
+            <a href="#" class="card-link" onclick="event.preventDefault();">Read Note &rarr;</a>
           </div>
         `;
+        
+        // Open post details in modal on click
+        card.addEventListener('click', (e) => {
+          openPostModal(post);
+        });
+
         grid.appendChild(card);
       });
 
       renderPagination(totalPages);
     }
+
+    // Parse simple markdown bodies into HTML paragraphs and headings
+    function renderMarkdownToHTML(markdown) {
+      if (!markdown) return "<p>No content available.</p>";
+      let html = markdown
+        // Replace headings
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        // Replace blockquotes
+        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+        // Replace images
+        .replace(/\!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" />')
+        // Replace line breaks with paragraphs
+        .trim();
+
+      // Wrap double breaks in paragraphs
+      const paragraphs = html.split(/\n\s*\n/);
+      return paragraphs.map(p => {
+        if (p.startsWith('<h') || p.startsWith('<blockquote') || p.startsWith('<img')) return p;
+        return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+      }).join('');
+    }
+
+    // Modal Control Functions
+    const modal = document.getElementById('post-modal');
+    const modalTitle = document.getElementById('modal-post-title');
+    const modalCategory = document.getElementById('modal-post-category');
+    const modalDate = document.getElementById('modal-post-date');
+    const modalBody = document.getElementById('modal-post-body');
+    const modalClose = document.getElementById('modal-close');
+
+    function openPostModal(post) {
+      modalCategory.textContent = post.category;
+      modalDate.textContent = formatDate(post.date);
+      modalTitle.textContent = post.title;
+      
+      // Parse post body markdown or fallback to excerpt
+      const bodyContent = post.body ? post.body : post.excerpt;
+      modalBody.innerHTML = renderMarkdownToHTML(bodyContent);
+      
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+
+    function closePostModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = ''; // Resume scrolling
+    }
+
+    modalClose.addEventListener('click', closePostModal);
+    
+    // Close modal on background click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closePostModal();
+      }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closePostModal();
+      }
+    });
 
     // Render pagination controls
     function renderPagination(totalPages) {
@@ -805,9 +1014,6 @@
     // Boot
     window.addEventListener('DOMContentLoaded', fetchPosts);
   </script>
-
-</body>
-</html>
 
 </body>
 </html>
