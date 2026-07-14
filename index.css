@@ -83,31 +83,31 @@ img { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--font-headline);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  padding: 14px 28px;
+  padding: 12px 24px;
   border-radius: 999px;
   border: 3px solid var(--ink);
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.1s, box-shadow 0.1s;
   white-space: nowrap;
 }
 .btn-primary {
   background: var(--yellow);
   color: var(--ink);
-  box-shadow: 4px 4px 0px var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
 }
-.btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--ink); }
+.btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
 .btn-outline {
   background: transparent;
   color: var(--ink);
   border: 3px solid var(--ink);
-  box-shadow: 4px 4px 0px var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
 }
-.btn-outline:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0px var(--ink); background: var(--ink); color: var(--bg); }
+.btn-outline:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); background: var(--ink); color: var(--bg); }
 .btn-cta-lg {
   background: var(--orange);
   color: #fff;
@@ -115,11 +115,11 @@ img { display: block; max-width: 100%; }
   font-size: 16px;
   padding: 18px 48px;
   border-radius: 999px;
-  font-weight: 800;
-  box-shadow: 6px 6px 0px var(--ink);
-  transition: transform 0.15s, box-shadow 0.15s;
+  font-weight: 900;
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
 }
-.btn-cta-lg:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0px var(--ink); }
+.btn-cta-lg:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--ink); }
 
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -151,33 +151,20 @@ img { display: block; max-width: 100%; }
 .nav-links a:hover { color: var(--yellow); }
 /* Yellow pill CTA — Neobrutalist Blog style */
 .btn-nav {
-  font-family: var(--font-headline);
-  font-size: 14px;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--ink);
-  border: 3px solid var(--ink);
-  padding: 12px 24px;
-  border-radius: 50px;
-  background-color: var(--yellow);
-  cursor: pointer;
   box-shadow: 3px 3px 0 var(--offwhite);
-  transition: transform 0.1s, box-shadow 0.1s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
+  background-color: var(--yellow);
+  color: var(--ink);
 }
 .btn-nav:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--offwhite); }
 
 /* ── Centered & Minimal hero style ────────────────────────── */
 #hero {
   background: #000000;
-  min-height: 68vh;
+  min-height: calc(85vh - 75px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 0;
+  padding: 20px 0;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -534,7 +521,7 @@ img { display: block; max-width: 100%; }
 .program-card-dark:hover .card-image-overlay,
 .program-card-light:hover .card-image-overlay,
 .pml-card-main:hover .card-image-overlay {
-  opacity: 0.15;
+  opacity: 0;
 }
 
 /* Card logo images — darken to black so they read on light gradient backgrounds */
