@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes on Creative Practice — 22 Tango Blog</title>
+  <title>22 Tango Blog</title>
   <!-- Google Fonts: Unbounded (Headings), Inter (Body), IBM Plex Mono (Dates/Metadata) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,11 +51,14 @@
 
     /* ─── HERO / TITLE SECTION ───────────────────────────────────── */
     #hero {
-      background-color: var(--lavender);
-      color: var(--ink);
-      padding: 100px 0 140px; /* High bottom padding to clear the zigzag overlap */
+      background-color: #141210;
+      color: var(--offwhite);
+      padding: 60px 0 90px;
       position: relative;
       text-align: center;
+      border-bottom: 3px solid var(--ink);
+      min-height: 0;
+      display: block;
     }
     .hero-headline {
       font-family: var(--font-headline);
@@ -65,12 +68,14 @@
       text-transform: uppercase;
       margin-bottom: 24px;
       letter-spacing: -0.02em;
+      color: var(--offwhite);
     }
     .hero-subhead {
       font-size: clamp(16px, 2vw, 20px);
       font-weight: 500;
       max-width: 700px;
       margin: 0 auto;
+      color: rgba(255,255,255,0.7);
     }
 
     /* Flat downward torn-receipt zigzag edge */
@@ -89,37 +94,6 @@
       background-size: 40px 64px;
       background-position: 0 0, 20px 0, 20px -32px, 0px -32px;
       z-index: 5;
-    }
-
-    /* ─── CATEGORY FILTER BAR ────────────────────────────────────── */
-    #filter-bar {
-      padding: 60px 0 20px;
-      background-color: var(--bg-dark);
-    }
-    .filter-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-    }
-    .filter-tag {
-      background-color: var(--offwhite);
-      color: var(--ink);
-      font-family: var(--font-headline);
-      font-weight: 700;
-      font-size: 13px;
-      text-transform: uppercase;
-      padding: 10px 20px;
-      border: 3px solid var(--ink);
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.1s, box-shadow 0.1s, background-color 0.15s;
-      box-shadow: 4px 4px 0 var(--ink);
-    }
-    .filter-tag:hover, .filter-tag.active {
-      background-color: var(--mint);
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 var(--ink);
     }
 
     /* ─── THE BLOG GRID ──────────────────────────────────────────── */
@@ -468,22 +442,11 @@
   <!-- ② HERO / TITLE SECTION -->
   <section id="hero">
     <div class="container">
-      <h1 class="hero-headline">Notes on Creative Practice</h1>
+      <h1 class="hero-headline">Blog</h1>
       <p class="hero-subhead">Thoughts on process, craft, and leaving perfection at the door.</p>
     </div>
   </section>
 
-  <!-- ③ CATEGORY FILTER BAR -->
-  <section id="filter-bar">
-    <div class="container">
-      <div class="filter-wrapper">
-        <button class="filter-tag active">All Notes</button>
-        <button class="filter-tag">Creative Process</button>
-        <button class="filter-tag">Mentorship</button>
-        <button class="filter-tag">Studio Technique</button>
-      </div>
-    </div>
-  </section>
 
   <!-- ④ THE BLOG GRID -->
   <main id="blog-grid-section">
@@ -508,7 +471,6 @@
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-header-meta">
-          <span class="modal-category" id="modal-post-category">Category</span>
           <span class="modal-date" id="modal-post-date">Date</span>
           <h2 class="modal-title" id="modal-post-title">Post Title</h2>
         </div>
@@ -734,21 +696,16 @@
       const grid = document.getElementById('blog-grid');
       grid.innerHTML = '';
 
-      // Filter by category
-      const filtered = blogPosts.filter(post => {
-        return currentCategory === 'All Notes' || post.category.toLowerCase() === currentCategory.toLowerCase();
-      });
-
-      if (filtered.length === 0) {
-        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:60px 0; color:var(--offwhite); font-family:var(--font-mono);">No posts found in this category.</div>`;
+      if (blogPosts.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:60px 0; color:var(--offwhite); font-family:var(--font-mono);">No posts found.</div>`;
         document.getElementById('pagination-nav').innerHTML = '';
         return;
       }
 
       // Calculate Pagination
       const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-      const paginated = filtered.slice(startIndex, startIndex + POSTS_PER_PAGE);
-      const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
+      const paginated = blogPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
+      const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE);
 
       // Render Cards
       paginated.forEach(post => {
@@ -786,11 +743,9 @@
 
         card.innerHTML = `
           <div class="card-img-block ${post.image ? '' : fallbackColorClass}" ${imgBlockStyle}>
-            <span class="card-img-placeholder">${post.category}</span>
           </div>
           <div class="card-body-wrapper">
             <div class="card-meta">
-              <span class="card-tag">${post.category}</span>
               <span class="card-date">${formatDate(post.date)}</span>
             </div>
             <h3 class="card-title">${post.title}</h3>
@@ -836,13 +791,11 @@
     // Modal Control Functions
     const modal = document.getElementById('post-modal');
     const modalTitle = document.getElementById('modal-post-title');
-    const modalCategory = document.getElementById('modal-post-category');
     const modalDate = document.getElementById('modal-post-date');
     const modalBody = document.getElementById('modal-post-body');
     const modalClose = document.getElementById('modal-close');
 
     function openPostModal(post) {
-      modalCategory.textContent = post.category;
       modalDate.textContent = formatDate(post.date);
       modalTitle.textContent = post.title;
       
@@ -900,34 +853,22 @@
             if (currentPage > 1) {
               currentPage--;
               renderPosts();
-              window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+              window.scrollTo({ top: document.getElementById('blog-grid-section').offsetTop - 80, behavior: 'smooth' });
             }
           } else if (btn.classList.contains('btn-pag-next')) {
             if (currentPage < totalPages) {
               currentPage++;
               renderPosts();
-              window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+              window.scrollTo({ top: document.getElementById('blog-grid-section').offsetTop - 80, behavior: 'smooth' });
             }
           } else {
             currentPage = parseInt(btn.textContent);
             renderPosts();
-            window.scrollTo({ top: document.getElementById('filter-bar').offsetTop - 80, behavior: 'smooth' });
+            window.scrollTo({ top: document.getElementById('blog-grid-section').offsetTop - 80, behavior: 'smooth' });
           }
         });
       });
     }
-
-    // Event Listeners for category filter buttons
-    document.querySelectorAll('.filter-tag').forEach(tag => {
-      tag.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-        tag.classList.add('active');
-        
-        currentCategory = tag.textContent;
-        currentPage = 1;
-        renderPosts();
-      });
-    });
 
     // Boot
     window.addEventListener('DOMContentLoaded', fetchPosts);
