@@ -1,5 +1,5 @@
 ---
-title: You only have weeks left to vibe code
+title: Blog 1
 date: 2026-07-06
 category: Creative Process
 image: /assets/uploads/photo-10-11-25-2-30-24-pm.jpg

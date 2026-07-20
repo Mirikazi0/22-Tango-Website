@@ -1,5 +1,5 @@
 ---
-title: Entering the Creative Flow
+title: Blog 2
 date: 2026-07-06
 category: Creative Process
 image: /assets/uploads/voice-lab-batch-06-380-of-391-.jpg
