@@ -924,15 +924,23 @@
         }
 
         article.innerHTML = `
-          <a href="blog_archive.html" class="blog-card-image ${post.image ? '' : colorClass}" ${imgStyle} aria-label="Read: ${post.title}">
+          <a href="blog_post.html?title=${encodeURIComponent(post.title)}" class="blog-card-image ${post.image ? '' : colorClass}" ${imgStyle} aria-label="Read: ${post.title}">
           </a>
           <div class="blog-card-body">
             <div class="blog-card-date">${dateStr}</div>
             <h3 class="blog-card-headline">${post.title}</h3>
             <p class="blog-card-excerpt">${post.excerpt}</p>
-            <a href="blog_archive.html" class="blog-card-arrow">Read Note <span>→</span></a>
+            <a href="blog_post.html?title=${encodeURIComponent(post.title)}" class="blog-card-arrow">Read Note <span>→</span></a>
           </div>
         `;
+        
+        article.addEventListener('click', (e) => {
+          // Prevent navigating twice if clicking an anchor
+          if (e.target.tagName !== 'A') {
+            window.location.href = `blog_post.html?title=${encodeURIComponent(post.title)}`;
+          }
+        });
+        
         container.appendChild(article);
 
         // Re-observe for reveal scroll animation

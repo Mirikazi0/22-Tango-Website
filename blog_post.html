@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post — 22 Tango</title>
+  <!-- Google Fonts: Unbounded (Headings), Inter (Body), IBM Plex Mono (Dates/Metadata) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css" />
+  
+  <style>
+    /* ─── NEOBRUTALIST DESIGN SYSTEM ───────────────────────────── */
+    :root {
+      --bg-dark: var(--offwhite);
+    }
+
+    body {
+      background-color: var(--offwhite);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* ─── POST HEADER ────────────────────────────────────────────── */
+    .post-hero {
+      background-color: var(--offwhite);
+      padding: 80px 0 60px;
+      border-bottom: 3px solid var(--ink);
+      text-align: center;
+    }
+    .post-meta-top {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+    .post-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .post-author-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--ink);
+    }
+    .post-author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--ink);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      border: 2px solid var(--ink);
+    }
+
+    /* Keep text light when hero has a background image */
+    .post-hero.has-bg {
+      color: #FFFFFF;
+    }
+    .post-hero.has-bg .post-headline {
+      color: #FFFFFF;
+    }
+    .post-hero.has-bg .post-author-bar {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .post-hero.has-bg .post-meta-top {
+      color: var(--yellow);
+    }
+
+    /* ─── POST CONTENT (MEDIUM STYLE) ────────────────────────────── */
+    .post-container {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+    .post-body-content {
+      font-size: 18px;
+      line-height: 1.85;
+      color: rgba(26, 18, 9, 0.85);
+    }
+    .post-body-content p {
+      margin: 0 0 28px 0;
+    }
+    .post-body-content h2 {
+      font-family: var(--font-headline);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 48px 0 20px;
+      line-height: 1.2;
+    }
+    .post-body-content h3 {
+      font-family: var(--font-headline);
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 36px 0 16px;
+      line-height: 1.2;
+    }
+    .post-body-content blockquote {
+      border-left: 4px solid var(--yellow);
+      margin: 36px 0;
+      padding: 8px 0 8px 24px;
+      font-style: italic;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.6;
+    }
+    .post-body-content img {
+      width: 100%;
+      height: auto;
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 var(--ink);
+      margin: 36px 0;
+      display: block;
+    }
+    .post-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      transition: transform 0.2s ease;
+    }
+    .post-back-btn:hover {
+      transform: translateX(-4px);
+    }
+
+    /* Loading and Error States */
+    .post-loading, .post-error {
+      text-align: center;
+      padding: 120px 24px;
+      font-family: var(--font-mono);
+      color: var(--ink);
+    }
+    .post-error a {
+      color: var(--orange);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ① HEADER -->
+  <header id="header" role="banner">
+    <div class="container">
+      <nav class="nav-inner" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-logo" id="nav-logo" style="display: flex; align-items: center;" aria-label="22 Tango Logo">
+          <!-- Stark white wireframe header logo -->
+          <svg height="32" viewBox="0 0 781 253" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: #FFFFFF;">
+            <path d="M81.2815 0.311069C89.087 -0.912668 101.395 1.67356 108.534 4.59086C154.229 23.2632 156.738 75.2514 131.162 111.88C124.704 121.387 116.64 129.679 109.323 138.397C100.791 148.56 92.1204 158.688 83.5695 168.799C81.6414 171.079 69.4812 184.681 68.889 186.277L123.68 186.357C134.889 186.359 147.794 186.665 158.883 186.261C158.567 188.546 158.66 192.893 158.66 195.297L158.675 210.18C158.69 223.907 158.359 238.871 158.742 252.484C156.555 252.037 150.491 252.211 147.896 252.216L127.195 252.252L47.4871 252.248C42.6692 252.25 0.863514 252.42 0 251.971C0.00623378 251.811 0.0127385 251.651 0.0189723 251.491C5.21713 245.054 18.7688 229.472 23.3439 224.037L42.1463 202.062C43.0912 200.955 44.7949 199.644 45.6183 198.609C48.3397 195.186 51.4859 191.173 54.3702 187.905C69.2554 171.061 83.9457 154.046 98.4387 136.864L110.596 122.759C113.755 119.137 120.367 111.766 122.406 107.68C119.735 109.738 116.608 112.258 113.602 113.78C75.0775 133.287 26.9785 108.452 24.7478 64.2018C23.033 30.1842 47.1483 2.5618 81.2815 0.311069Z" fill="#FFFFFF"/>
+            <path d="M256.147 0.335833C287.199 -2.72653 318.024 21.9621 321.688 52.7064C324.098 72.9354 317.666 95.0408 306.101 111.689C295.341 127.182 281.432 140.604 269.772 155.415C268.674 156.811 267.051 158.035 266.099 159.279C259.058 168.478 250.686 176.78 243.753 186.122L243.907 186.303L301.166 186.386C311.834 186.389 323.122 186.565 333.741 186.328C332.687 194.845 334.508 250.128 333.053 252.116C331.646 252.66 231.649 252.27 222.869 252.271L179.353 252.149C178.05 252.134 175.922 252.542 174.883 251.879C175.046 250.613 207.219 213.467 210.932 209.107L229.754 187.312C230.136 186.874 233.16 184.028 233.213 183.919C234.653 180.928 236.925 179.147 238.993 176.726C243.2 171.808 247.3 166.73 251.805 162.096C252.664 161.212 253.174 159.921 253.976 158.983C258.673 154.107 263.028 148.76 267.333 143.53C268.333 142.233 270.065 141.1 271.024 139.828C279.312 128.835 289.82 119.397 297.214 107.742C294.65 109.316 292.325 111.562 289.679 113.03C268.362 124.857 239.169 122.454 220.633 106.54C180.003 71.6579 200.916 3.54334 256.147 0.335833Z" fill="#FFFFFF"/>
+            <path d="M430.407 185.74C435.86 185.586 441.6 185.645 447.063 185.649C446.768 200.862 447.747 219.58 446.912 234.417C454.208 234.653 461.965 234.49 469.363 234.631C469.294 237.977 469.748 247.989 469.105 250.69C456.147 250.635 443.189 250.653 430.233 250.738C430.607 244.603 430.33 235.495 430.33 229.176L430.407 185.74Z" fill="#FFFFFF"/>
+            <path d="M562.915 252.091C549.499 252.122 537.498 252.274 524.086 251.986C524.364 242.062 524.167 222.092 524.316 212.164C535.155 212.169 545.993 212.016 556.832 212.193C556.769 209.112 557.172 201.761 556.637 198.673C545.866 198.816 535.093 198.718 524.324 198.847C524.492 188.083 524.237 175.766 524.502 165.006C537.481 165.176 550.457 165.01 563.435 165.159C563.366 161.769 563.819 151.782 563.177 149.083C544.757 149.034 526.337 149.049 507.918 149.123C508.283 182.91 508.064 218.232 508.199 252.023C498.423 252.016 484.779 252.179 475.004 252.001C475.293 223.366 475.099 193.181 475.228 164.542C475.291 160.017 472.937 151.693 475.275 149.036C499.757 149.039 524.239 149.183 548.721 149.032C553.844 149.027 558.113 149.261 563.236 149.037C563.262 153.948 563.14 160.407 563.233 165.318C570.669 165.578 578.852 165.419 586.29 165.57C586.221 162.247 586.666 152.261 586.033 149.562C573.197 149.507 560.36 149.525 547.525 149.609L547.602 106.18C553.056 106.026 558.796 106.086 564.258 106.09C563.963 121.303 564.943 140.021 564.108 154.858C571.403 155.093 579.16 154.931 586.559 155.072C586.489 158.418 586.943 168.43 586.3 171.131C573.342 171.076 560.384 171.094 547.428 171.179C547.801 165.044 547.525 155.936 547.525 149.617L547.602 106.18L507.918 106.26L508.199 209.16L562.915 209.24C562.599 211.525 562.692 215.872 562.692 218.276L562.707 233.159C562.722 246.886 562.391 261.85 562.774 275.463L508.204 275.222C508.134 278.568 508.589 288.58 507.946 291.28C494.988 291.225 482.03 291.243 469.075 291.328C469.448 285.193 469.171 276.085 469.171 269.766C473.003 269.768 480.669 269.878 484.5 269.733C484.184 272.018 484.277 276.365 484.277 278.769C484.341 283.473 484.218 289.444 484.372 294.137C482.185 293.69 476.12 293.864 473.526 293.869L452.825 293.905C448.007 293.907 406.202 294.077 405.338 293.628C405.344 293.468 405.351 293.308 405.357 293.148C410.555 286.711 424.107 271.129 428.682 265.694C434.975 258.337 441.05 250.781 447.382 243.462C450.407 239.957 453.791 236.086 456.912 232.697C471.797 215.853 486.488 198.838 500.981 181.656C505.034 176.84 509.28 171.867 513.332 167.051C517.151 162.518 528.214 149.336 530.138 147.24C527.467 149.298 524.34 151.818 521.334 153.34C482.809 172.847 434.71 148.012 432.48 103.762C430.765 69.7442 454.88 42.1218 489.013 39.8711C496.819 38.6473 509.127 41.2336 516.266 44.1509C561.961 62.8232 564.47 114.811 538.894 151.44C532.436 160.947 524.372 169.239 517.055 177.957C508.523 188.12 499.852 198.248 491.301 208.359C489.373 210.639 477.213 224.241 476.621 225.837C478.435 225.838 482.062 225.84 483.876 225.841L538.667 225.917C549.876 225.919 562.781 226.225 573.87 225.821C573.554 228.106 573.647 232.453 573.647 234.857L573.662 249.74C573.677 263.467 573.346 278.431 573.729 292.044L562.915 291.99L524.086 291.89C524.364 281.966 524.167 261.996 524.316 252.068C535.155 252.073 545.993 251.92 556.832 252.097L562.915 252.091Z" fill="#FFFFFF"/>
+            <path d="M741.264 185.69C746.717 185.535 752.457 185.594 757.92 185.598C757.625 200.811 758.604 219.529 757.769 234.366C765.065 234.602 772.822 234.44 780.221 234.58C780.151 237.926 780.605 247.939 779.962 250.639C767.004 250.584 754.046 250.602 741.091 250.687C741.464 244.552 741.187 235.444 741.187 229.125L741.264 185.69Z" fill="#FFFFFF"/>
+          </svg>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" id="nav-home">Home</a>
+          <a href="programs.html" id="nav-programs">Programs</a>
+          <a href="blog_archive.html" id="nav-blog" class="active">Blog</a>
+          <a href="faq.html" id="nav-faq">FAQ</a>
+        </div>
+        <a href="index.html#cta-band" class="btn btn-nav" id="nav-enroll">Enroll Now →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ② HERO -->
+  <section id="post-hero-section">
+    <div class="post-hero">
+      <div class="container">
+        <span class="post-meta-top" id="post-meta-date">Date</span>
+        <h1 class="post-headline" id="post-title">Loading Post...</h1>
+        <div class="post-author-bar">
+          <div class="post-author-avatar">22T</div>
+          <span>By 22 Tango Team</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ POST CONTENT -->
+  <main class="post-container">
+    <a href="blog_archive.html" class="post-back-btn">&larr; Back to all notes</a>
+    
+    <div id="post-content-area" class="post-body-content">
+      <!-- Content populated by JS -->
+      <div class="post-loading">Loading note content...</div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg height="24" viewBox="0 0 781 253" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: var(--offwhite);">
+              <path d="M81.2815 0.311069C89.087 -0.912668 101.395 1.67356 108.534 4.59086C154.229 23.2632 156.738 75.2514 131.162 111.88C124.704 121.387 116.64 129.679 109.323 138.397C100.791 148.56 92.1204 158.688 83.5695 168.799C81.6414 171.079 69.4812 184.681 68.889 186.277L123.68 186.357C134.889 186.359 147.794 186.665 158.883 186.261C158.567 188.546 158.66 192.893 158.66 195.297L158.675 210.18C158.69 223.907 158.359 238.871 158.742 252.484C156.555 252.037 150.491 252.211 147.896 252.216L127.195 252.252L47.4871 252.248C42.6692 252.25 0.863514 252.42 0 251.971C0.00623378 251.811 0.0127385 251.651 0.0189723 251.491C5.21713 245.054 18.7688 229.472 23.3439 224.037L42.1463 202.062C43.0912 200.955 44.7949 199.644 45.6183 198.609C48.3397 195.186 51.4859 191.173 54.3702 187.905C69.2554 171.061 83.9457 154.046 98.4387 136.864L110.596 122.759C113.755 119.137 120.367 111.766 122.406 107.68C119.735 109.738 116.608 112.258 113.602 113.78C75.0775 133.287 26.9785 108.452 24.7478 64.2018C23.033 30.1842 47.1483 2.5618 81.2815 0.311069Z" fill="currentColor"/>
+              <path d="M256.147 0.335833C287.199 -2.72653 318.024 21.9621 321.688 52.7064C324.098 72.9354 317.666 95.0408 306.101 111.689C295.341 127.182 281.432 140.604 269.772 155.415C268.674 156.811 267.051 158.035 266.099 159.279C259.058 168.478 250.686 176.78 243.753 186.122L243.907 186.303L301.166 186.386C311.834 186.389 323.122 186.565 333.741 186.328C332.687 194.845 334.508 250.128 333.053 252.116C331.646 252.66 231.649 252.27 222.869 252.271L179.353 252.149C178.05 252.134 175.922 252.542 174.883 251.879C175.046 250.613 207.219 213.467 210.932 209.107L229.754 187.312C230.136 186.874 233.16 184.028 233.213 183.919C234.653 180.928 236.925 179.147 238.993 176.726C243.2 171.808 247.3 166.73 251.805 162.096C252.664 161.212 253.174 159.921 253.976 158.983C258.673 154.107 263.028 148.76 267.333 143.53C268.333 142.233 270.065 141.1 271.024 139.828C279.312 128.835 289.82 119.397 297.214 107.742C294.65 109.316 292.325 111.562 289.679 113.03C268.362 124.857 239.169 122.454 220.633 106.54C180.003 71.6579 200.916 3.54334 256.147 0.335833Z" fill="currentColor"/>
+            </svg>
+          </div>
+          <p class="footer-tagline">Creative School.<br />Music &amp; Multimedia Arts.<br />Philippines.</p>
+        </div>
+
+        <!-- Navigate -->
+        <div class="footer-nav-col" style="grid-column: 4 / 7;">
+          <div class="footer-nav-label">Navigate</div>
+          <a href="index.html" id="footer-nav-home">Home</a>
+          <a href="programs.html" id="footer-nav-programs">Programs</a>
+          <a href="blog_archive.html" id="footer-nav-blog">Blog</a>
+          <a href="faq.html" id="footer-nav-faq">FAQ</a>
+        </div>
+
+        <!-- Programs -->
+        <div class="footer-nav-col" style="grid-column: 7 / 10;">
+          <div class="footer-nav-label">Programs</div>
+          <a href="programs.html">Song Studio</a>
+          <a href="programs.html">StudioWork</a>
+          <a href="programs.html">Voice Lab</a>
+          <a href="programs.html">U-Host</a>
+          <a href="programs.html">Mixroom</a>
+          <a href="programs.html">PML</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-contact-col" style="grid-column: 10 / 13;">
+          <div class="footer-contact-label">Contact</div>
+          <div class="footer-contact-info">
+            <a href="mailto:hello@22tango.com" id="footer-email">hello@22tango.com</a>
+            <a href="#" id="footer-instagram">Instagram</a>
+            <a href="#" id="footer-facebook">Facebook</a>
+            <a href="#" id="footer-location">Philippines</a>
+          </div>
+        </div>
+
+      </div><!-- /footer-grid -->
+    </div><!-- /container -->
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-inner">
+          <span class="footer-copy">© 2026 22 Tango Creative School. All Rights Reserved.</span>
+          <div class="footer-legal">
+            <a href="#" id="footer-privacy">Privacy</a>
+            <a href="#" id="footer-terms">Terms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC POST LOADER JS -->
+  <script>
+    // Configuration
+    const mockPosts = [
+      {
+        title: "Stepping away from the grid",
+        date: "2026-07-02",
+        category: "Creative Process",
+        color: "yellow",
+        excerpt: "Why strict metric timing and quantizing can kill the natural groove of your drum tracks. How to play loose and keep human micro-timing intact.",
+        body: "### The Myth of Perfect Timing\n\nWe have been conditioned to believe that music is perfect when it is aligned. We align our grids, we stretch our waveforms, we quantize our MIDI notes until every drum transient hits precisely on the line. But when we do that, we often edit out the very thing that makes the groove work: **tension and release**.\n\n### The Pocket Lives in the Imperfection\n\nA great groove isn't about hitting the exact mathematical coordinate of a beat. It's about how a drummer leans slightly behind the snare beat to create a lazy, laidback feel, or pushes just a fraction ahead on a fill to build energy. When you quantize to 100%, you lose that push and pull. You lose the human signature.\n\n> \"Breathing room in a grid is what turns a sequence into a performance.\"\n\n### Practical Exercises to Try\n\n1. **Quantize to 80% instead of 100%:** Keep the structure, but leave the human micro-timings alone.\n2. **Shift your snare back manually:** Try nudging your snare track back by 5 to 15 milliseconds. You'll instantly feel the track turn into a deep pocket.\n3. **Record without a click:** Lay down your chord progressions or scratch tracks completely click-free first, then let the tempo map float naturally."
+      },
+      {
+        title: "The one mic rule",
+        date: "2026-06-28",
+        category: "Studio Technique",
+        color: "orange",
+        excerpt: "Limitation breeds magic. How recording an entire acoustic group setup using a single condenser microphone shifts how you mix live balances.",
+        body: "### Forced Collaboration\n\nWhen you record a band with fifteen microphones, you defer all decisions to the mix stage. You fix levels, panning, tone, and performance alignment after the musicians have already gone home. But when you place one microphone in the center of the room, you are forced to mix the band **in the physical room**.\n\n### How to Balance the Room\n\nIf the acoustic guitar is too quiet, they must move closer to the mic. If the drummer is too loud, they must play quieter or move back. This forces musicians to listen to one another and play as a cohesive unit. The mixing balance happens at the source.\n\n> \"The microphone doesn't lie. It captures the energy of the room, not just the isolated signals of individual instruments.\"\n\n### Setting Up Your Room\n\nPlace a single high-quality large-diaphragm condenser microphone in omnidirectional mode in the middle of your space. Have the group form a circle around it. Record a test run, listen to the balance, adjust positions, and press record again. The result is a natural, unified stereo field that is impossible to replicate with multi-track panning plugins."
+      },
+      {
+        title: "Finding your voice early",
+        date: "2026-06-15",
+        category: "Mentorship",
+        color: "mint",
+        excerpt: "Advice on moving away from chasing commercial trends, and leaning into your unique flaws to develop a signature songwriting voice.",
+        body: "### Imitation vs. Emulation\n\nWhen we start out, we copy our heroes. We write their chord progressions, try to emulate their vocal runs, and mirror their production styles. This is a healthy phase of learning, but staying in it too long prevents you from finding your own unique perspective.\n\n### Flaws Are Features\n\nThe vocal crack, the strange vibrato, the lyrics that feel too personal or raw — these are often the very features that will define your signature sound. If you try to polish them away to make them sound like everything else on the radio, you become a replica rather than an original.\n\n> \"Your uniqueness is not in how perfectly you can replicate the standard, but in how beautifully you navigate your deviations from it.\"\n\n### Actionable Creative Prompts\n\n- **Write a song in 20 minutes:** Don't edit as you write. Let the raw first thoughts land on the page.\n- **Sing without feedback:** Turn down your headphone monitor and sing raw. Let your natural voice shape itself without micro-correcting.\n- **Write about something ugly:** Stop writing about clean romance or abstract ideas. Write about a specific, messy, real-world argument or detail."
+      },
+      {
+        title: "Analog warm harmonics",
+        date: "2026-06-02",
+        category: "Studio Technique",
+        color: "white",
+        excerpt: "Getting the sound out of the box. Practical steps for running digital instruments through analog hardware preamps to saturate transient spikes.",
+        body: "### The Digital Edge\n\nDigital audio is incredibly precise. It is clean, silent, and virtually infinite in dynamic range. But it is also sterile. When digital signals clip, they produce harsh digital distortion. In contrast, analog circuits saturate gracefully, adding rich harmonic overtones that make audio feel thick, cohesive, and warm.\n\n### Practical Saturation Steps\n\nYou don't need a million-dollar mixing board to get analog warmth. By running your digital synthesizer tracks or vocal stems out of your audio interface, through a physical preamp or tube compressor, and recording them back in, you can round out the harsh digital transients naturally.\n\n> \"Analog hardware rounds off the hard edges, gluing the transients into a single warm texture.\""
+      },
+      {
+        title: "Perfect is the blocker",
+        date: "2026-05-24",
+        category: "Creative Process",
+        color: "orange",
+        excerpt: "Why finishing five imperfect draft songs is infinitely more valuable to your craft growth than spending six months tweaking a single chorus loop.",
+        body: "### The Trap of Infinite Tweaking\n\nWe've all been there: a 4-bar loop that sounds incredible, and three weeks spent adjusting the snare decay and the compressor settings instead of writing the verse. This isn't producing; it's hiding. It's using technical perfectionism as a shield to avoid the vulnerability of finishing a full song.\n\n### The 80% Rule\n\nGet your songs to 80% done, wrap them up, and write the next one. The speed of finishing projects builds creative momentum. By writing five complete, simple, imperfect songs, you gain experience in structure, melody transitions, and lyric mapping. You learn how to tell a complete story.\n\n> \"Quantity leads to quality. Finish the work, put it away, and start the next piece.\""
+      },
+      {
+        title: "Listening as an instrument",
+        date: "2026-05-10",
+        category: "Mentorship",
+        color: "yellow",
+        excerpt: "Active feedback workshop secrets. How learning to analyze someone else's work objectively makes you a better self-editor in the studio.",
+        body: "### The Art of Deep Listening\n\nWe spend years learning to play instruments, sing, or navigate DAWs. But we rarely practice the art of listening. Active listening is the ability to decouple your emotional reaction to a song from a clinical analysis of its parts.\n\n### How to Practice Analytical Listening\n\nNext time you listen to a track, pick one instrument and follow it from the start to the end. Note when it enters, when it drops out, how it interacts with the vocal, and where it sits in the stereo field. By understanding how arrangements are balanced mechanically, you can make better choices in your own productions."
+      }
+    ];
+
+    // YAML parser fallback
+    function parseMarkdown(text) {
+      const match = text.match(/^---([\s\S]*?)---/);
+      if (!match) return null;
+      const yamlStr = match[1];
+      const result = {};
+      yamlStr.split('\n').forEach(line => {
+        const parts = line.split(':');
+        if (parts.length >= 2) {
+          const key = parts[0].trim();
+          const val = parts.slice(1).join(':').trim().replace(/^['"]|['"]$/g, '');
+          result[key] = val;
+        }
+      });
+      return result;
+    }
+
+    // Format Dates nicely
+    function formatDate(dateStr) {
+      try {
+        const options = { year: 'numeric', month: 'long', day: '2-digit' };
+        return new Date(dateStr).toLocaleDateString('en-US', options);
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    // Parse simple markdown bodies into HTML
+    function renderMarkdownToHTML(markdown) {
+      if (!markdown) return "<p>No content available.</p>";
+      let html = markdown
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+        .replace(/\!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" />')
+        .trim();
+
+      const paragraphs = html.split(/\n\s*\n/);
+      return paragraphs.map(p => {
+        if (p.startsWith('<h') || p.startsWith('<blockquote') || p.startsWith('<img')) return p;
+        return `<p>${p.replace(/\n/g, '<br>')}</p>`;
+      }).join('');
+    }
+
+    async function fetchPostDetail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const postTitleParam = urlParams.get('title');
+      
+      if (!postTitleParam) {
+        showError("No post specified.");
+        return;
+      }
+
+      let matchedPost = null;
+
+      try {
+        const response = await fetch('https://api.github.com/repos/Mirikazi0/22-Tango-Website/contents/content/blog');
+        if (response.ok) {
+          const files = await response.json();
+          const mdFiles = files.filter(f => f.name.endsWith('.md'));
+          
+          for (let file of mdFiles) {
+            const fileRes = await fetch(file.download_url);
+            const text = await fileRes.text();
+            const parsed = parseMarkdown(text);
+            if (parsed && parsed.title === postTitleParam) {
+              matchedPost = {
+                title: parsed.title,
+                date: parsed.date || '2026-07-01',
+                image: parsed.image || '',
+                body: text.replace(/^---[\s\S]*?---/, '')
+              };
+              break;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Failed fetching from GitHub API, looking in mock posts", err);
+      }
+
+      // Check mock posts fallback
+      if (!matchedPost) {
+        matchedPost = mockPosts.find(p => p.title === postTitleParam);
+      }
+
+      if (matchedPost) {
+        document.title = `${matchedPost.title} — 22 Tango Blog`;
+        document.getElementById('post-title').textContent = matchedPost.title;
+        document.getElementById('post-meta-date').textContent = formatDate(matchedPost.date);
+        
+        // Handle post image hero background if present
+        if (matchedPost.image) {
+          const imgSrc = matchedPost.image.startsWith('http') || matchedPost.image.startsWith('assets') || matchedPost.image.startsWith('/assets')
+            ? matchedPost.image 
+            : `/content/blog/${matchedPost.image}`;
+          
+          const heroSec = document.querySelector('.post-hero');
+          if (heroSec) {
+            heroSec.style.backgroundImage = `linear-gradient(rgba(20,18,16,0.85), rgba(20,18,16,0.95)), url('${imgSrc}')`;
+            heroSec.style.backgroundSize = 'cover';
+            heroSec.style.backgroundPosition = 'center';
+            heroSec.classList.add('has-bg');
+          }
+        }
+
+        document.getElementById('post-content-area').innerHTML = renderMarkdownToHTML(matchedPost.body);
+      } else {
+        showError("Post not found.");
+      }
+    }
+
+    function showError(msg) {
+      document.getElementById('post-title').textContent = "Post Not Found";
+      document.getElementById('post-content-area').innerHTML = `
+        <div class="post-error">
+          <p>${msg}</p>
+          <p><a href="blog_archive.html">Return to all notes</a></p>
+        </div>
+      `;
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchPostDetail);
+  </script>
+</body>
+</html>

@@ -51,7 +51,7 @@
 
     /* ─── HERO / TITLE SECTION ───────────────────────────────────── */
     #hero {
-      background-color: #141210;
+      background-color: #000000;
       color: var(--offwhite);
       padding: 60px 0 90px;
       position: relative;
@@ -75,7 +75,7 @@
       font-weight: 500;
       max-width: 700px;
       margin: 0 auto;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     /* Flat downward torn-receipt zigzag edge */
@@ -466,21 +466,6 @@
     </div>
   </main>
 
-  <!-- DYNAMIC POST VIEW MODAL -->
-  <div id="post-modal" role="dialog" aria-modal="true" aria-labelledby="modal-post-title">
-    <div class="modal-container">
-      <div class="modal-header">
-        <div class="modal-header-meta">
-          <span class="modal-date" id="modal-post-date">Date</span>
-          <h2 class="modal-title" id="modal-post-title">Post Title</h2>
-        </div>
-        <button class="modal-close-btn" id="modal-close" aria-label="Close details">×</button>
-      </div>
-      <div class="modal-body" id="modal-post-body">
-        <!-- Markdown content rendered here -->
-      </div>
-    </div>
-  </div>
 
   <!-- FOOTER -->
   <footer id="footer" role="contentinfo">
@@ -750,13 +735,13 @@
             </div>
             <h3 class="card-title">${post.title}</h3>
             <p class="card-excerpt">${post.excerpt}</p>
-            <a href="#" class="card-link" onclick="event.preventDefault();">Read Note &rarr;</a>
+            <a href="blog_post.html?title=${encodeURIComponent(post.title)}" class="card-link">Read Note &rarr;</a>
           </div>
         `;
         
-        // Open post details in modal on click
+        // Navigate to post page on click
         card.addEventListener('click', (e) => {
-          openPostModal(post);
+          window.location.href = `blog_post.html?title=${encodeURIComponent(post.title)}`;
         });
 
         grid.appendChild(card);
@@ -788,45 +773,7 @@
       }).join('');
     }
 
-    // Modal Control Functions
-    const modal = document.getElementById('post-modal');
-    const modalTitle = document.getElementById('modal-post-title');
-    const modalDate = document.getElementById('modal-post-date');
-    const modalBody = document.getElementById('modal-post-body');
-    const modalClose = document.getElementById('modal-close');
 
-    function openPostModal(post) {
-      modalDate.textContent = formatDate(post.date);
-      modalTitle.textContent = post.title;
-      
-      // Parse post body markdown or fallback to excerpt
-      const bodyContent = post.body ? post.body : post.excerpt;
-      modalBody.innerHTML = renderMarkdownToHTML(bodyContent);
-      
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // Stop background scrolling
-    }
-
-    function closePostModal() {
-      modal.style.display = 'none';
-      document.body.style.overflow = ''; // Resume scrolling
-    }
-
-    modalClose.addEventListener('click', closePostModal);
-    
-    // Close modal on background click
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closePostModal();
-      }
-    });
-
-    // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display === 'flex') {
-        closePostModal();
-      }
-    });
 
     // Render pagination controls
     function renderPagination(totalPages) {
