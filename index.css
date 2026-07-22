@@ -621,9 +621,22 @@ img { display: block; max-width: 100%; }
 #card-u-host .card-thumb .card-logo-title img {
   height: 90px !important;
 }
+#card-voice-lab .card-thumb .card-logo-title img {
+  height: 90px !important;
+}
 #card-mixroom-intro .card-thumb .card-logo-title img,
 #card-mixroom-mastery .card-thumb .card-logo-title img {
-  height: 88px !important;
+  height: 108px !important;
+}
+#card-song-studio .card-thumb .card-logo-title,
+#card-studiowork .card-thumb .card-logo-title {
+  max-width: 80% !important;
+  width: 80% !important;
+}
+#card-song-studio .card-thumb .card-logo-title img,
+#card-studiowork .card-thumb .card-logo-title img {
+  height: auto !important;
+  width: 100% !important;
 }
 
 /* ─── Card Body (padding lives here now) ──────── */
