@@ -103,10 +103,10 @@
           </svg>
         </a>
         <div class="nav-links">
-          <a href="index.html" id="nav-home">Home</a>
-          <a href="programs.html" id="nav-programs">Programs</a>
-          <a href="blog_archive.html" id="nav-blog">Blog</a>
-          <a href="faq.html" id="nav-faq">FAQ</a>
+          <a href="." id="nav-home">Home</a>
+          <a href="programs" id="nav-programs">Programs</a>
+          <a href="blog" id="nav-blog">Blog</a>
+          <a href="faq" id="nav-faq">FAQ</a>
         </div>
         <a href="#cta-band" class="btn btn-nav" id="nav-enroll">Enroll Now →</a>
       </nav>
@@ -338,7 +338,7 @@
                   <span class="card-badge">4 Days · Group</span>
                   <h3 class="program-card-name">Song Studio</h3>
                   <div class="card-tagline">A Songwriting Course</div>
-                  <a href="song-studio.html" class="card-link">View Details →</a>
+                  <a href="song-studio" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -354,7 +354,7 @@
                   <span class="card-badge">4 Days · Group</span>
                   <h3 class="program-card-name">StudioWork</h3>
                   <div class="card-tagline">A Music Production Program</div>
-                  <a href="studio-work.html" class="card-link">View Details →</a>
+                  <a href="studio-work" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -370,7 +370,7 @@
                   <span class="card-badge">2 Days · Group</span>
                   <h3 class="program-card-name">Voice Lab</h3>
                   <div class="card-tagline">A Voice Acting &amp; Voice-Over Course</div>
-                  <a href="voice-lab.html" class="card-link">View Details →</a>
+                  <a href="voice-lab" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -386,7 +386,7 @@
                   <span class="card-badge">1 Day · Group</span>
                   <h3 class="program-card-name">U-Host</h3>
                   <div class="card-tagline">An Event Hosting Course</div>
-                  <a href="u-host.html" class="card-link">View Details →</a>
+                  <a href="u-host" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -419,7 +419,7 @@
                   <span class="card-badge">1 Day · Group Class</span>
                   <h3 class="program-card-name">Mixroom DJ Intro</h3>
                   <div class="card-tagline">Introduction to DJing</div>
-                  <a href="mixroom.html" class="card-link">View Details →</a>
+                  <a href="mixroom" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -435,7 +435,7 @@
                   <span class="card-badge">6 Sessions · 1-on-1</span>
                   <h3 class="program-card-name">Mixroom DJ Mastery</h3>
                   <div class="card-tagline">Beginner / Advanced / Master Track</div>
-                  <a href="mixroom-mastery.html" class="card-link">View Details →</a>
+                  <a href="mixroom-mastery" class="card-link">View Details →</a>
                 </div>
               </article>
 
@@ -468,7 +468,7 @@
                     <div class="card-tagline">The 10-Session Mastery Package · 4–5 Week Intensive</div>
                     <p class="card-desc">A structured, intensive program tailored to your current skill level. Each
                       session builds on the last with a clear trajectory — not open-ended lessons that go nowhere.</p>
-                    <a href="pml.html" class="card-link">View Details →</a>
+                    <a href="pml" class="card-link">View Details →</a>
                   </div>
                   <!-- Right Instruments Column -->
                   <div class="pml-instruments-col">
@@ -592,7 +592,7 @@
 
         <!-- Full-width CTA -->
         <div class="blog-cta-row">
-          <a href="blog_archive.html" class="btn btn-primary" id="blog-explore-all">Explore All Notes →</a>
+          <a href="blog" class="btn btn-primary" id="blog-explore-all">Explore All Notes →</a>
         </div>
       </div>
     </div>
@@ -842,21 +842,21 @@
         <!-- Navigate -->
         <div class="footer-nav-col" style="grid-column: 4 / 7;">
           <div class="footer-nav-label">Navigate</div>
-          <a href="index.html" id="footer-nav-home">Home</a>
-          <a href="programs.html" id="footer-nav-programs">Programs</a>
-          <a href="blog_archive.html" id="footer-nav-blog">Blog</a>
-          <a href="faq.html" id="footer-nav-faq">FAQ</a>
+          <a href="." id="footer-nav-home">Home</a>
+          <a href="programs" id="footer-nav-programs">Programs</a>
+          <a href="blog" id="footer-nav-blog">Blog</a>
+          <a href="faq" id="footer-nav-faq">FAQ</a>
         </div>
 
         <!-- Programs -->
         <div class="footer-nav-col" style="grid-column: 7 / 10;">
           <div class="footer-nav-label">Programs</div>
-          <a href="programs.html">Song Studio</a>
-          <a href="programs.html">StudioWork</a>
-          <a href="programs.html">Voice Lab</a>
-          <a href="programs.html">U-Host</a>
-          <a href="programs.html">Mixroom</a>
-          <a href="programs.html">PML</a>
+          <a href="programs">Song Studio</a>
+          <a href="programs">StudioWork</a>
+          <a href="programs">Voice Lab</a>
+          <a href="programs">U-Host</a>
+          <a href="programs">Mixroom</a>
+          <a href="programs">PML</a>
         </div>
 
         <!-- Contact -->
@@ -1039,20 +1039,21 @@
         }
 
         article.innerHTML = `
-          <a href="blog_post.html?title=${encodeURIComponent(post.title)}" class="blog-card-image ${post.image ? '' : colorClass}" ${imgStyle} aria-label="Read: ${post.title}">
+          <a href="blog-post?title=${encodeURIComponent(post.title)}" class="blog-card-image ${post.image ? '' : colorClass}" ${imgStyle} aria-label="Read: ${post.title}">
           </a>
           <div class="blog-card-body">
             <div class="blog-card-date">${dateStr}</div>
             <h3 class="blog-card-headline">${post.title}</h3>
             <p class="blog-card-excerpt">${post.excerpt}</p>
-            <a href="blog_post.html?title=${encodeURIComponent(post.title)}" class="blog-card-arrow">Read Note <span>→</span></a>
+            <a href="blog-post?title=${encodeURIComponent(post.title)}" class="blog-card-arrow">Read Note <span>→</span></a>
           </div>
         `;
 
         article.addEventListener('click', (e) => {
           // Prevent navigating twice if clicking an anchor
           if (e.target.tagName !== 'A') {
-            window.location.href = `blog_post.html?title=${encodeURIComponent(post.title)}`;
+            const page = window.location.protocol === 'file:' ? 'blog-post.html' : 'blog-post';
+            window.location.href = `${page}?title=${encodeURIComponent(post.title)}`;
           }
         });
 
@@ -1064,6 +1065,21 @@
     }
 
     window.addEventListener('DOMContentLoaded', loadLandingPosts);
+  </script>
+  <script>
+    // Local file protocol fallback
+    if (window.location.protocol === 'file:') {
+      document.querySelectorAll('a[href]').forEach(a => {
+        let href = a.getAttribute('href');
+        if (href) {
+          if (href === '.') {
+            a.setAttribute('href', 'index.html');
+          } else if (!href.startsWith('http') && !href.startsWith('#') && !href.includes('.') && href !== '/') {
+            a.setAttribute('href', href + '.html');
+          }
+        }
+      });
+    }
   </script>
 </body>
 
