@@ -470,6 +470,16 @@
     window.addEventListener('DOMContentLoaded', fetchPostDetail);
   </script>
   <script>
+    // Mobile navigation toggle
+    const toggleBtn = document.querySelector('.mobile-nav-toggle');
+    const navInner = document.querySelector('.nav-inner');
+    if (toggleBtn && navInner) {
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = navInner.classList.toggle('nav-active');
+        toggleBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
     // Local file protocol fallback
     if (window.location.protocol === 'file:') {
       document.querySelectorAll('a[href]').forEach(a => {

@@ -35,7 +35,13 @@
           <a href="programs" id="nav-programs">Programs</a>
           <a href="blog" id="nav-blog">Blog</a>
           <a href="faq" id="nav-faq">FAQ</a>
+          <a href="#cta-band" class="btn btn-nav btn-nav-mobile" style="display: none;">Enroll Now →</a>
         </div>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <a href="#register" class="btn btn-nav" id="nav-enroll">Enroll Now →</a>
       </nav>
     </div>
@@ -224,6 +230,16 @@
   </footer>
 
   <script>
+    // Mobile navigation toggle
+    const toggleBtn = document.querySelector('.mobile-nav-toggle');
+    const navInner = document.querySelector('.nav-inner');
+    if (toggleBtn && navInner) {
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = navInner.classList.toggle('nav-active');
+        toggleBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
     // Local file protocol fallback
     if (window.location.protocol === 'file:') {
       document.querySelectorAll('a[href]').forEach(a => {
