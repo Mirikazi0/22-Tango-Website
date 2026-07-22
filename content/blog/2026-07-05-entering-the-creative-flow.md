@@ -2,7 +2,7 @@
 title: Stop Decorating, Start Designing
 date: 2026-07-22
 category: Creative Process
-image: ""
+image: /assets/uploads/anya-villanueva-voice-lessons-culimnation-2-of-44-.jpg
 color: white
 excerpt: Why making things look pretty is the lowest level of design, and how to
   actually build systems that solve real problems.
