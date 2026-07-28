@@ -483,7 +483,7 @@ img { display: block; max-width: 100%; }
   border: 2px solid var(--ink);
   border-radius: 999px;
   padding: 8px 16px;
-  margin-top: 10px;
+  margin-top: auto;
   display: block;
   text-align: center;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -645,7 +645,6 @@ img { display: block; max-width: 100%; }
   display: flex;
   flex-direction: column;
   flex: 1;
-  position: relative;
   z-index: 1;
 }
 .card-instructor-avatar {
@@ -655,7 +654,7 @@ img { display: block; max-width: 100%; }
   border: 3px solid var(--ink);
   background: #FFFFFF;
   position: absolute;
-  top: -26px; /* overlapping the seam */
+  top: 157px; /* overlapping the thumb/body seam (180px thumb + 3px border - 26px overlap) */
   right: 24px;
   z-index: 15;
   overflow: hidden;
