@@ -206,7 +206,7 @@
       flex: 1;
       margin-bottom: 8px;
     }
-    .card-link {
+    .blog-card-link {
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.1em;
@@ -223,7 +223,7 @@
       text-decoration: none;
       transition: opacity 0.2s;
     }
-    .card-link:hover {
+    .blog-card-link:hover {
       opacity: 0.7;
       text-decoration: none;
     }
@@ -744,7 +744,7 @@
             </div>
             <h3 class="card-title">${post.title}</h3>
             <p class="card-excerpt">${post.excerpt}</p>
-            <a href="blog-post?title=${encodeURIComponent(post.title)}" class="card-link">Read Note &rarr;</a>
+            <a href="blog-post?title=${encodeURIComponent(post.title)}" class="blog-card-link">Read Note &rarr;</a>
           </div>
         `;
         
