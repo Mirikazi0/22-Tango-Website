@@ -19,7 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="index.css" />
 </head>
-<body>
+<body style="--page-accent:#FF8C69;--page-accent-lt:rgba(255,140,105,0.12);--page-accent-text:#1A1209;">
 
   <!-- HEADER -->
   <header id="header" role="banner">
@@ -49,6 +49,8 @@
 
   <!-- ① HERO -->
   <section class="prog-hero" id="prog-hero-studio-work">
+    <img src="22TangoCarousel/slide_1.jpg" alt="" class="prog-hero-img" />
+    <div class="prog-hero-glow"></div>
     <div class="container">
       <img src="Studio Work logo.svg" alt="StudioWork" class="prog-hero-logo" />
       <p class="prog-hero-tagline">A Music Production Program</p>
@@ -139,67 +141,19 @@
     </div>
   </section>
 
-  <!-- ④ REGISTRATION FORM -->
-  <section class="prog-form-section" id="register">
+  <!-- ④ NEXT BATCH -->
+  <section class="prog-batch-section" id="register">
     <div class="container">
-      <div class="prog-form-inner">
+      <div class="prog-batch-header">
         <a href="programs" class="prog-back-link">← Back to Programs</a>
-        <p class="prog-form-label">Registration</p>
-        <h2 class="prog-form-heading">Secure Your<br />Spot.</h2>
-        <p class="prog-form-sub">Fill out the form below and we'll reach out within 24–48 hours to confirm your slot in StudioWork.</p>
-        <form class="prog-form" id="studio-work-form" action="#" method="POST">
-          <div class="prog-form-group">
-            <label for="sw-name">Full Name</label>
-            <input type="text" id="sw-name" name="full_name" placeholder="Your full name" required />
-          </div>
-          <div class="prog-form-group">
-            <label for="sw-email">Email Address</label>
-            <input type="email" id="sw-email" name="email" placeholder="you@example.com" required />
-          </div>
-          <div class="prog-form-group">
-            <label for="sw-phone">Contact Number</label>
-            <input type="tel" id="sw-phone" name="phone" placeholder="+63 912 345 6789" />
-          </div>
-          <div class="prog-form-group">
-            <label for="sw-age">Age Bracket</label>
-            <select id="sw-age" name="age_bracket">
-              <option value="" disabled selected>Select age range</option>
-              <option value="under-18">Under 18</option>
-              <option value="18-24">18–24</option>
-              <option value="25-34">25–34</option>
-              <option value="35+">35+</option>
-            </select>
-          </div>
-          <div class="prog-form-group">
-            <label for="sw-experience">Experience Level</label>
-            <select id="sw-experience" name="experience">
-              <option value="" disabled selected>Select your level</option>
-              <option value="beginner">Complete Beginner</option>
-              <option value="some">Some Experience</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
-            </select>
-          </div>
-          <div class="prog-form-group">
-            <label for="sw-source">How did you hear about us?</label>
-            <select id="sw-source" name="source">
-              <option value="" disabled selected>Select one</option>
-              <option value="instagram">Instagram</option>
-              <option value="facebook">Facebook</option>
-              <option value="friend">A Friend</option>
-              <option value="google">Google</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="prog-form-group full-width">
-            <label for="sw-notes">Anything else we should know? <span style="opacity:.4;">(Optional)</span></label>
-            <textarea id="sw-notes" name="notes" placeholder="Tell us a bit about yourself or any questions you have…"></textarea>
-          </div>
-          <div class="prog-form-submit">
-            <button type="submit" class="btn btn-primary">Send My Registration →</button>
-            <span class="prog-form-fine-print">We'll reach out within 24–48 hours to confirm your slot.</span>
-          </div>
-        </form>
+        <p class="prog-batch-label">Next Batch</p>
+        <h2 class="prog-batch-heading">Stay Tuned.</h2>
+        <p class="prog-batch-sub">The next run of StudioWork is being planned. Follow us on Facebook to be the first to know when enrollment opens — or send us a message if you have questions.</p>
+      </div>
+      <div class="prog-coming-soon-block">
+        <span class="prog-batch-badge badge-upcoming">Coming Soon</span>
+        <p class="prog-coming-soon-date">Date TBA</p>
+        <a href="https://www.facebook.com/22TangoMusicGroup" target="_blank" rel="noopener" class="btn-waitlist">Message Us on Facebook →</a>
       </div>
     </div>
   </section>
