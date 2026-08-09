@@ -2,7 +2,7 @@
 title: "Inside the Studio: Celebrating Your Creative Journey"
 date: 2026-08-09
 category: Creative Process
-image: /assets/uploads/shk_0655.jpg
+image: /assets/uploads/anya-villanueva-voice-lessons-culimnation-2-of-44-.jpg
 color: mint
 excerpt: Quality creative work thrives when it is given dedicated space, time,
   and respect.
