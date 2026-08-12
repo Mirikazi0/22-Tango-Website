@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIGITAL OJT PORTFOLIO — Chaz Grant Borromeo | 22 Tango Music Group</title>
+  <meta name="description"
+    content="Digital On-the-Job Training Portfolio Presentation by Chaz Grant Borromeo for 22 Tango Music Group (June–August 2026)." />
+
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DIGITAL OJT PORTFOLIO — Chaz Grant Borromeo" />
+  <meta property="og:description"
+    content="Digital On-the-Job Training Portfolio Presentation for 22 Tango Music Group." />
+  <meta property="og:image" content="heroimage-try.jpg" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+
+  <style>
+    /* ================================================================
+       22 TANGO PRESENTATION DECK STYLES
+       ================================================================ */
+    
+    :root {
+      --slide-aspect: 16 / 9;
+      --slide-bg: var(--bg);
+      --slide-border: 3px solid var(--ink);
+    }
+
+    body {
+      background: #0E0A06;
+      color: var(--ink);
+    }
+
+    /* Deck Header & Control Bar */
+    .deck-control-bar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: #000000;
+      border-bottom: 3px solid var(--ink);
+      padding: 10px 0;
+    }
+
+    .deck-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .deck-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .deck-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: var(--yellow);
+      color: var(--ink);
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    .deck-page-title {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--offwhite);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .deck-btn {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: var(--offwhite);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .deck-btn:hover {
+      background: var(--yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .deck-btn-primary {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .deck-btn-primary:hover {
+      background: var(--pink);
+      color: #fff;
+    }
+
+    .slide-select {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--offwhite);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      padding: 6px 12px;
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+
+    /* Progress bar */
+    .deck-progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    .deck-progress-fill {
+      height: 100%;
+      background: var(--orange);
+      width: 6.25%;
+      transition: width 0.3s ease;
+    }
+
+    /* Main Deck Layout Container */
+    .presentation-container {
+      max-width: 1340px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Slide Card Canvas */
+    .slide-card {
+      background: var(--bg);
+      border: 4px solid var(--ink);
+      border-radius: 20px;
+      box-shadow: 10px 10px 0 var(--ink);
+      padding: 60px 64px;
+      min-height: 720px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Slide Deck View Mode (Active Slide Only) */
+    body.mode-deck .slide-card {
+      display: none;
+    }
+
+    body.mode-deck .slide-card.active-slide {
+      display: flex;
+      animation: slideIn 0.35s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Slide Top / Bottom Decor Bars */
+    .slide-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid rgba(26, 18, 9, 0.15);
+      padding-bottom: 16px;
+      margin-bottom: 32px;
+    }
+
+    .slide-page-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: var(--peach);
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+    }
+
+    .slide-company-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .slide-footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid rgba(26, 18, 9, 0.15);
+      padding-top: 16px;
+      margin-top: 40px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Slide Content Components */
+    .slide-main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide-title-xl {
+      font-family: var(--font-headline);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    .slide-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(16px, 2vw, 22px);
+      color: var(--dim);
+      line-height: 1.5;
+      max-width: 820px;
+      margin-bottom: 32px;
+    }
+
+    /* Neo-Brutalist Grid Components */
+    .neo-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .neo-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .neo-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .neo-card {
+      background: #FFFFFF;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 4px 4px 0 var(--ink);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .neo-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .neo-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .neo-card-title {
+      font-family: var(--font-headline);
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .neo-card-num {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    .neo-card-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* Program Specific Themes */
+    .card-theme-song { background: var(--card-song); }
+    .card-theme-studio { background: var(--card-studio); color: #fff; }
+    .card-theme-voice { background: var(--card-voice); }
+    .card-theme-mixroom { background: var(--card-mixroom); }
+    .card-theme-dark { background: var(--dark); color: #FFF; }
+    .card-theme-peach { background: var(--peach); }
+    .card-theme-mint { background: var(--mint); }
+    .card-theme-sky { background: var(--sky); }
+
+    /* Timeline Stepper */
+    .timeline-track {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 20px;
+      bottom: 20px;
+      width: 4px;
+      background: var(--ink);
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: 3px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-headline);
+      font-weight: 900;
+      font-size: 18px;
+      box-shadow: 3px 3px 0 var(--ink);
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex: 1;
+      background: #FFF;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    /* Hours Table */
+    .hours-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 5px 5px 0 var(--ink);
+      background: #FFF;
+      margin-bottom: 24px;
+    }
+
+    .hours-table th {
+      background: var(--dark);
+      color: #FFF;
+      font-family: var(--font-headline);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 3px solid var(--ink);
+    }
+
+    .hours-table td {
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(26, 18, 9, 0.12);
+      color: var(--ink);
+    }
+
+    .hours-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .hours-table tr:nth-child(even) {
+      background: var(--offwhite);
+    }
+
+    .stat-callout {
+      background: var(--yellow);
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 24px 32px;
+      box-shadow: 5px 5px 0 var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-callout-num {
+      font-family: var(--font-headline);
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    /* Stepper journey */
+    .journey-stepper {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .journey-node {
+      background: #FFF;
+      border: 3px solid var(--ink);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 4px 4px 0 var(--ink);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+    }
+
+    .journey-node-num {
+      font-family: var(--font-headline);
+      font-size: 14px;
+      font-weight: 900;
+      background: var(--orange);
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+      width: fit-content;
+    }
+
+    /* Document upload frame */
+    .doc-placeholder-box {
+      border: 3px dashed var(--ink);
+      background: var(--offwhite);
+      border-radius: 16px;
+      padding: 48px 32px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 280px;
+    }
+
+    .doc-placeholder-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--peach);
+      border: 3px solid var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* Responsive Presentation */
+    @media (max-width: 1024px) {
+      .slide-card {
+        padding: 40px 32px;
+        min-height: auto;
+      }
+
+      .neo-grid-2,
+      .neo-grid-3,
+      .neo-grid-4,
+      .journey-stepper {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body class="mode-deck">
+
+  <!-- ① DECK NAVIGATION & CONTROLS -->
+  <header class="deck-control-bar" role="banner">
+    <div class="container">
+      <div class="deck-bar-inner">
+        <div class="deck-title-group">
+          <a href="index.html" class="nav-logo" aria-label="22 Tango Home">
+            <svg height="26" viewBox="0 0 781 253" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M81.2815 0.311069C89.087 -0.912668 101.395 1.67356 108.534 4.59086C154.229 23.2632 156.738 75.2514 131.162 111.88C124.704 121.387 116.64 129.679 109.323 138.397C100.791 148.56 92.1204 158.688 83.5695 168.799C81.6414 171.079 69.4812 184.681 68.889 186.277L123.68 186.357C134.889 186.359 147.794 186.665 158.883 186.261C158.567 188.546 158.66 192.893 158.66 195.297L158.675 210.18C158.69 223.907 158.359 238.871 158.742 252.484C156.555 252.037 150.491 252.211 147.896 252.216L127.195 252.252L47.4871 252.248C42.6692 252.25 0.863514 252.42 0 251.971C0.00623378 251.811 0.0127385 251.651 0.0189723 251.491C5.21713 245.054 18.7688 229.472 23.3439 224.037L42.1463 202.062C43.0912 200.955 44.7949 199.644 45.6183 198.609C48.3397 195.186 51.4859 191.173 54.3702 187.905C69.2554 171.061 83.9457 154.046 98.4387 136.864L110.596 122.759C113.755 119.137 120.367 111.766 122.406 107.68C119.735 109.738 116.608 112.258 113.602 113.78C75.0775 133.287 26.9785 108.452 24.7478 64.2018C23.033 30.1842 47.1483 2.5618 81.2815 0.311069Z" fill="#FFFFFF"/>
+              <path d="M256.147 0.335833C287.199 -2.72653 318.024 21.9621 321.688 52.7064C324.098 72.9354 317.666 95.0408 306.101 111.689C295.341 127.182 281.432 140.604 269.772 155.415C268.674 156.811 267.051 158.035 266.099 159.279C259.058 168.478 250.686 176.78 243.753 186.122L243.907 186.303L301.166 186.386C311.834 186.389 323.122 186.565 333.741 186.328C332.687 194.845 334.508 250.128 333.053 252.116C331.646 252.66 231.649 252.27 222.869 252.271L179.353 252.149C178.05 252.134 175.922 252.542 174.883 251.879C175.046 250.613 207.219 213.467 210.932 209.107L229.754 187.312C230.136 186.874 233.16 184.028 233.213 183.919C234.653 180.928 236.925 179.147 238.993 176.726C243.2 171.808 247.3 166.73 251.805 162.096C252.664 161.212 253.174 159.921 253.976 158.983C258.673 154.107 263.028 148.76 267.333 143.53C268.333 142.233 270.065 141.1 271.024 139.828C279.312 128.835 289.82 119.397 297.214 107.742C294.65 109.316 292.325 111.562 289.679 113.03C268.362 124.857 239.169 122.454 220.633 106.54C180.003 71.6579 200.916 3.54334 256.147 0.335833Z" fill="#FFFFFF"/>
+              <path d="M536.156 0.804199C536.645 0.906064 536.959 1.08716 537.304 1.47481L574.816 44.1901C576.297 45.8737 579.793 51.4593 581.927 52.5487C581.77 52.843 582.214 41.8019 582.216 41.1653L582.196 17.9373C582.191 13.8033 582.363 8.20073 581.997 4.18556C585.154 4.38929 591.673 4.22801 594.87 4.07804C594.613 11.8 594.845 19.8784 594.784 27.6286C594.637 46.2925 595.018 65.1431 594.693 83.7929C591.107 83.5863 586.414 83.8099 582.628 83.7589C582.074 83.2864 581.438 82.661 580.893 82.1545C577.013 78.4223 574.987 75.8276 571.533 71.9511L554.163 52.4553C551.342 49.2551 548.419 46.2501 545.583 42.9253C542.662 39.5015 540.835 38.2848 538.255 34.2244C539.102 39.4563 538.481 44.0119 538.604 49.2183C538.867 60.3442 538.025 72.9726 538.597 83.9259C535.421 83.5495 529.433 83.7108 526.217 83.9146C526.367 79.4071 526.182 73.9148 526.17 69.3309L526.124 39.776C526.12 34.6714 525.892 26.1742 526.424 21.2762C523.893 19.4738 520.967 15.8434 519.477 13.161C521.56 10.2012 532.644 3.11596 536.156 0.804199Z" fill="#FFFFFF"/>
+              <path d="M481.221 0.311523C482.046 0.427536 481.766 0.362477 482.486 1.00479C483.441 4.17109 487.767 13.3219 489.299 16.8165L505.92 55.1685C507.986 59.9307 513.097 70.9293 514.361 75.219C514.224 75.8273 513.681 76.4357 513.194 76.7554C510.786 78.3456 499.853 87.0353 497.85 86.9108C496.302 85.3602 488.297 65.3635 486.601 61.5323C482.765 61.6709 478.729 61.6313 474.876 61.6511C471.814 61.6172 461.215 61.3144 458.691 61.77C456.132 63.9035 452.331 81.229 449.703 83.453C449.213 83.869 439.582 83.9029 438.351 83.371C438.22 81.4214 442.311 71.8093 443.213 69.4325C446.427 60.7938 449.742 52.1919 453.157 43.6296C457.025 33.9156 460.453 23.947 464.393 14.2331C466.551 8.91346 469.607 7.87217 474.201 4.89263C476.568 3.359 478.762 1.77159 481.221 0.311523ZM465.594 56.0033C468.121 54.1528 472.14 51.4703 474.485 49.5773C477.291 49.4613 479.326 49.3566 482.141 49.5801C479.119 45.6216 474.532 31.2021 471.659 25.9447C471.415 25.806 471.171 25.6702 470.927 25.5344L470.85 25.8881C470.325 28.231 469.394 30.4833 468.593 32.7413C465.778 40.6839 462.612 48.536 460.113 56.5833C459.677 57.9868 458.796 59.2233 458.745 60.6636L459.073 60.8192C461.061 59.5601 464.179 56.5296 465.594 56.0033Z" fill="#FFFFFF"/>
+            </svg>
+          </a>
+          <span class="deck-badge">PPT PRESENTATION</span>
+          <span class="deck-page-title" id="deck-page-indicator">SLIDE 01 / 16</span>
+        </div>
+
+        <div class="deck-controls">
+          <select class="slide-select" id="slideSelector" aria-label="Select Slide">
+            <option value="1">PAGE 01 — THE OJT EXPERIENCE</option>
+            <option value="2">PAGE 02 — AGENDA</option>
+            <option value="3">PAGE 03 — THE COMPANY</option>
+            <option value="4">PAGE 04 — ROLE & RESPONSIBILITIES</option>
+            <option value="5">PAGE 05 — OJT TIMELINE</option>
+            <option value="6">PAGE 06 — KEY LEARNINGS</option>
+            <option value="7">PAGE 07 — OVERALL EXPERIENCE</option>
+            <option value="8">PAGE 08 — MY CONTRIBUTIONS</option>
+            <option value="9">PAGE 09 — CREATIVE OUTPUTS</option>
+            <option value="10">PAGE 10 — THE HOURS</option>
+            <option value="11">PAGE 11 — MY OJT JOURNEY</option>
+            <option value="12">PAGE 12 — MY REFLECTION</option>
+            <option value="13">PAGE 13 — REQUIREMENTS</option>
+            <option value="14">PAGE 14 — ENDORSEMENT LETTER</option>
+            <option value="15">PAGE 15 — COMPLETION CERTIFICATE</option>
+            <option value="16">PAGE 16 — OJT DOCUMENTATION</option>
+          </select>
+
+          <button class="deck-btn" id="prevBtn" title="Previous Slide (Left Arrow)">← Prev</button>
+          <button class="deck-btn deck-btn-primary" id="nextBtn" title="Next Slide (Right Arrow)">Next →</button>
+          <button class="deck-btn" id="toggleViewBtn" title="Switch Deck / Scroll View">Mode: Deck</button>
+          <button class="deck-btn" id="fullscreenBtn" title="Fullscreen Deck">Fullscreen</button>
+        </div>
+      </div>
+    </div>
+    <div class="deck-progress-track">
+      <div class="deck-progress-fill" id="progressFill"></div>
+    </div>
+  </header>
+
+  <!-- ② PRESENTATION SLIDE CANVAS -->
+  <main class="presentation-container">
+
+    <!-- PAGE 01 — THE OJT EXPERIENCE -->
+    <section class="slide-card active-slide" id="slide-1" data-slide="1">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 01 — THE OJT EXPERIENCE</span>
+        <span class="slide-company-tag">22 TANGO MUSIC GROUP</span>
+      </div>
+
+      <div class="slide-main-content">
+        <div class="neo-grid-2" style="align-items: center; gap: 40px;">
+          <div>
+            <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--orange); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px;">
+              DIGITAL OJT PORTFOLIO
+            </div>
+            <h1 class="slide-title-xl">From Design<br>to Production</h1>
+            <p class="slide-subtitle">
+              An overview of my experience contributing to real-world projects across UI/UX design, web development, video production, photography, branding, and digital content.
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="neo-card card-theme-peach">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--orange); margin-bottom: 6px;">INTERN PRESENTER</div>
+              <div style="font-family: var(--font-headline); font-size: 24px; font-weight: 900; color: var(--ink);">Chaz Grant Borromeo</div>
+              <div style="font-family: var(--font-body); font-size: 14px; color: var(--dim); margin-top: 4px;">Product Designer / Design & Creative Intern</div>
+            </div>
+
+            <div class="neo-card card-theme-mint">
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--ink); margin-bottom: 6px;">ORGANIZATION & DATES</div>
+              <div style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; color: var(--ink);">22 Tango Music Group</div>
+              <div style="font-family: var(--font-mono); font-size: 13px; color: var(--dim); margin-top: 4px;">Training Period: June 13 – August 2, 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>On-the-Job Training | June–August 2026</span>
+        <span>Slide 01 of 16</span>
+      </div>
+    </section>
+
+    <!-- PAGE 02 — AGENDA -->
+    <section class="slide-card" id="slide-2" data-slide="2">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 02 — AGENDA</span>
+        <span class="slide-company-tag">TABLE OF CONTENTS</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 24px;">Presentation Agenda</h2>
+        <div class="neo-grid-3">
+          <div class="neo-card" onclick="goToSlide(3)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Company Profile</span><span class="neo-card-num">01</span></div>
+            <div class="neo-card-body">Overview of 22 Tango Music Group & environment</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(4)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Role & Responsibilities</span><span class="neo-card-num">02</span></div>
+            <div class="neo-card-body">Multidisciplinary creative scope & tasks</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(5)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">OJT Timeline</span><span class="neo-card-num">03</span></div>
+            <div class="neo-card-body">Monthly focus areas across June & July</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(6)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">My Key Learnings</span><span class="neo-card-num">04</span></div>
+            <div class="neo-card-body">Core insights in UI/UX, web dev & constraints</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(7)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Overall Experience</span><span class="neo-card-num">05</span></div>
+            <div class="neo-card-body">Real-world impact & mindset shifts</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(8)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">My Contributions</span><span class="neo-card-num">06</span></div>
+            <div class="neo-card-body">Projects across web, branding, & programs</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(10)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">The Hours</span><span class="neo-card-num">07</span></div>
+            <div class="neo-card-body">Recorded weekly & total attendance hours</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(11)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">My OJT Journey</span><span class="neo-card-num">08</span></div>
+            <div class="neo-card-body">Evolution from Contributor to Builder</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(12)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">My Reflection</span><span class="neo-card-num">09</span></div>
+            <div class="neo-card-body">Personal takeaways & ultimate lesson</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(13)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Requirements</span><span class="neo-card-num">10</span></div>
+            <div class="neo-card-body">Academic & company documentation</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(14)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Endorsement Letter</span><span class="neo-card-num">11</span></div>
+            <div class="neo-card-body">Official institutional endorsement document</div>
+          </div>
+
+          <div class="neo-card" onclick="goToSlide(15)" style="cursor: pointer;">
+            <div class="neo-card-header"><span class="neo-card-title">Completion Certificate</span><span class="neo-card-num">12</span></div>
+            <div class="neo-card-body">Official training completion certificate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 02 of 16</span>
+        <span>Tap any card to jump directly to section</span>
+      </div>
+    </section>
+
+    <!-- PAGE 03 — THE COMPANY -->
+    <section class="slide-card" id="slide-3" data-slide="3">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 03 — THE COMPANY</span>
+        <span class="slide-company-tag">ABOUT THE ORGANISATION</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 42px; margin-bottom: 16px;">22 Tango Music Group</h2>
+        <p class="slide-subtitle" style="margin-bottom: 24px;">
+          22 Tango Music Group is a Cebu-based music and creative company focused on developing artists, music education, and creative production.
+        </p>
+
+        <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; letter-spacing: 0.1em;">
+          CREATIVE PROGRAMS & SPACES
+        </div>
+        <div class="neo-grid-4" style="margin-bottom: 24px;">
+          <div class="neo-card card-theme-song">
+            <div class="neo-card-title">Song Studio</div>
+            <div class="neo-card-body">Songwriting & music development program</div>
+          </div>
+          <div class="neo-card card-theme-studio">
+            <div class="neo-card-title">StudioWork</div>
+            <div class="neo-card-body">Audio recording & music production hub</div>
+          </div>
+          <div class="neo-card card-theme-voice">
+            <div class="neo-card-title">Voice Lab</div>
+            <div class="neo-card-body">Vocal training & performance mastery</div>
+          </div>
+          <div class="neo-card card-theme-mixroom">
+            <div class="neo-card-title">Mixroom</div>
+            <div class="neo-card-body">DJing, mixing & sound arts studio</div>
+          </div>
+        </div>
+
+        <div class="neo-card card-theme-dark">
+          <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; color: var(--yellow); margin-bottom: 8px;">
+            MY OJT ENVIRONMENT
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--peach); margin-bottom: 8px;">
+            Location: Mango Square Mall, Room Eleven Studios | Cebu City, Philippines
+          </div>
+          <p style="font-family: var(--font-body); font-size: 14px; line-height: 1.6; color: #EEE;">
+            During my OJT, I worked across different areas of the organization rather than being limited to a single role. My responsibilities included UI/UX design, web development, video production, photography, videography, branding, motion graphics, and digital content.
+          </p>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 03 of 16</span>
+        <span>22 Tango Creative School</span>
+      </div>
+    </section>
+
+    <!-- PAGE 04 — MY ROLE & RESPONSIBILITIES -->
+    <section class="slide-card" id="slide-4" data-slide="4">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 04 — MY ROLE & RESPONSIBILITIES</span>
+        <span class="slide-company-tag">CORE SCOPE</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 24px;">A Multidisciplinary Creative Role</h2>
+
+        <div class="neo-grid-3" style="margin-bottom: 20px;">
+          <div class="neo-card">
+            <div class="neo-card-header"><span class="neo-card-title">UI/UX & WEB DEV</span><span class="neo-card-num">01</span></div>
+            <div class="neo-card-body">Designed and developed digital experiences for 22 Tango, including website wireframes, high-fidelity interfaces, responsive layouts, program pages, FAQ systems, and CMS-powered blog features.</div>
+          </div>
+
+          <div class="neo-card">
+            <div class="neo-card-header"><span class="neo-card-title">VIDEO & MOTION</span><span class="neo-card-num">02</span></div>
+            <div class="neo-card-body">Edited promotional reels, event highlights, documentary videos, talking-head content, and album-related motion graphics.</div>
+          </div>
+
+          <div class="neo-card">
+            <div class="neo-card-header"><span class="neo-card-title">PHOTO & VIDEO</span><span class="neo-card-num">03</span></div>
+            <div class="neo-card-body">Documented live events, studio sessions, performances, and creative activities through photography and videography.</div>
+          </div>
+        </div>
+
+        <div class="neo-grid-2">
+          <div class="neo-card card-theme-peach">
+            <div class="neo-card-header"><span class="neo-card-title">BRANDING & CREATIVE DESIGN</span><span class="neo-card-num">04</span></div>
+            <div class="neo-card-body">Created posters, album artwork, promotional materials, and visual collaterals for Song Studio, Voice Lab, StudioWork, Mixroom, and Room 11.</div>
+          </div>
+
+          <div class="neo-card card-theme-mint">
+            <div class="neo-card-header"><span class="neo-card-title">CREATIVE SUPPORT</span><span class="neo-card-num">05</span></div>
+            <div class="neo-card-body">Collaborated with the team on concepts, content development, revisions, and production tasks across multiple projects.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 04 of 16</span>
+        <span>Product Designer / Design & Creative Intern</span>
+      </div>
+    </section>
+
+    <!-- PAGE 05 — OJT TIMELINE -->
+    <section class="slide-card" id="slide-5" data-slide="5">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 05 — OJT TIMELINE</span>
+        <span class="slide-company-tag">CHRONOLOGY</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 24px;">Training Timeline & Milestones</h2>
+
+        <div class="timeline-track">
+          <div class="timeline-step">
+            <div class="timeline-icon">01</div>
+            <div class="timeline-content">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <h3 style="font-family: var(--font-headline); font-size: 22px; font-weight: 800; color: var(--ink);">JUNE — Getting Started & Finding My Place</h3>
+                <span style="font-family: var(--font-mono); font-size: 11px; background: var(--yellow); padding: 4px 10px; border-radius: 999px; border: 2px solid var(--ink); font-weight: 600;">PHASE 1</span>
+              </div>
+              <p style="font-family: var(--font-body); font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 14px;">
+                Started my OJT by documenting Song Studio events through photography and videography. I then moved into video editing, website discovery, wireframing, and early development work for the 22 Tango website.
+              </p>
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--orange);">
+                Key Focus: Photography • Videography • Video Editing • Website Discovery • Wireframing • Development
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="timeline-icon" style="background: var(--sky);">02</div>
+            <div class="timeline-content">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <h3 style="font-family: var(--font-headline); font-size: 22px; font-weight: 800; color: var(--ink);">JULY — From Supporting Tasks to Building</h3>
+                <span style="font-family: var(--font-mono); font-size: 11px; background: var(--pink); color: #fff; padding: 4px 10px; border-radius: 999px; border: 2px solid var(--ink); font-weight: 600;">PHASE 2</span>
+              </div>
+              <p style="font-family: var(--font-body); font-size: 15px; color: var(--dim); line-height: 1.6; margin-bottom: 14px;">
+                Took on larger responsibilities across UI/UX design and website development while producing promotional videos, documentaries, posters, album artwork, and event documentation. I also worked on the development of the Cattski website and contributed to creative projects across 22 Tango’s programs.
+              </p>
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--orange);">
+                Key Focus: UI/UX • Web Development • Video Production • Branding • Motion Graphics • Creative Production
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 05 of 16</span>
+        <span>June 13 – August 2, 2026</span>
+      </div>
+    </section>
+
+    <!-- PAGE 06 — MY KEY LEARNINGS -->
+    <section class="slide-card" id="slide-6" data-slide="6">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 06 — MY KEY LEARNINGS</span>
+        <span class="slide-company-tag">GROWTH PILLARS</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 24px;">Core Competencies & Insights</h2>
+
+        <div class="neo-grid-3">
+          <div class="neo-card card-theme-peach" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--orange); margin-bottom: 8px;">/01</div>
+              <h3 style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; margin-bottom: 8px;">DESIGNING BEYOND THE SCREEN</h3>
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--dim); margin-bottom: 14px;">UI/UX & Product Thinking</div>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--ink); line-height: 1.6;">
+                I learned to think beyond individual screens and consider how content, navigation, interactions, and visual hierarchy work together to create a complete user experience.
+              </p>
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-mint" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">/02</div>
+              <h3 style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; margin-bottom: 8px;">BUILDING FOR REAL USERS</h3>
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--dim); margin-bottom: 14px;">Web Dev & Problem Solving</div>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--ink); line-height: 1.6;">
+                Working on the 22 Tango and Cattski websites taught me how to turn designs into working websites, troubleshoot issues, work with CMS systems, and make decisions based on actual project requirements.
+              </p>
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-sky" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px;">/03</div>
+              <h3 style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; margin-bottom: 8px;">CREATIVITY WITH CONSTRAINTS</h3>
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--dim); margin-bottom: 14px;">Production & Collaboration</div>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--ink); line-height: 1.6;">
+                Working across video, photography, branding, motion graphics, and web design taught me how to adapt my creative process to different projects, deadlines, feedback, and team requirements.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 06 of 16</span>
+        <span>22 Tango Music Group</span>
+      </div>
+    </section>
+
+    <!-- PAGE 07 — MY OVERALL EXPERIENCE -->
+    <section class="slide-card" id="slide-7" data-slide="7">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 07 — MY OVERALL EXPERIENCE</span>
+        <span class="slide-company-tag">PRACTICAL SYNTHESIS</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 20px;">Learning Through Real Work</h2>
+        
+        <p style="font-family: var(--font-body); font-size: 16px; color: var(--dim); line-height: 1.7; max-width: 900px; margin-bottom: 28px;">
+          My OJT experience was different from working on purely academic projects because the work had real users, real deadlines, real feedback, and real deliverables.<br><br>
+          I learned to switch between different disciplines depending on what the team needed. One day could involve UI/UX and web development, while another could involve video editing, photography, poster design, or motion graphics. The experience pushed me to become more adaptable and comfortable working outside a single design discipline.
+        </p>
+
+        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--orange); margin-bottom: 12px;">
+          TRANSFORMATION: WHAT CHANGED
+        </div>
+
+        <div class="neo-grid-2">
+          <div class="neo-card" style="border-left: 6px solid var(--orange);">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 6px;">BEFORE OJT</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; color: var(--ink);">Digital Interface Scope</div>
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); margin-top: 8px;">Focused primarily on designing digital interfaces in static canvas tools.</p>
+          </div>
+
+          <div class="neo-card card-theme-yellow" style="background: var(--yellow); border-left: 6px solid var(--ink);">
+            <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--ink); margin-bottom: 6px;">DURING OJT</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 900; color: var(--ink);">End-to-End Creative Production</div>
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--ink); margin-top: 8px;">Learned to contribute across the entire creative production process — from planning and design to development, content production, revisions, and final delivery.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 07 of 16</span>
+        <span>Real Users • Real Deadlines • Real Deliverables</span>
+      </div>
+    </section>
+
+    <!-- PAGE 08 — MY CONTRIBUTIONS -->
+    <section class="slide-card" id="slide-8" data-slide="8">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 08 — MY CONTRIBUTIONS</span>
+        <span class="slide-company-tag">PROJECT PORTFOLIO</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 34px; margin-bottom: 20px;">Selected Work & Projects</h2>
+
+        <div class="neo-grid-3" style="gap: 18px;">
+          <div class="neo-card">
+            <div class="neo-card-header"><span class="neo-card-title">01 — 22 TANGO WEBSITE</span></div>
+            <div class="neo-card-body" style="font-size: 13px;">
+              Contributed from discovery and wireframing through UI/UX design and development.<br>
+              <strong>Scope:</strong> Wireframes • High-fidelity UI/UX • Program pages • Learning Pledge section • Instructor cards • Testimonials • FAQ system • CMS & blog integration • Mobile responsiveness • URL navigation.
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div class="neo-card-header"><span class="neo-card-title">02 — CATTSKI WEBSITE</span></div>
+            <div class="neo-card-body" style="font-size: 13px;">
+              Built a multi-page personal brand website for Cattski Espina using Next.js and vanilla CSS.<br>
+              <strong>Pillars:</strong> Music • Audio & Film • Teaching • Blog.<br>
+              Includes CMS integration for blog management without code editing.
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-song">
+            <div class="neo-card-header"><span class="neo-card-title">03 — SONG STUDIO</span></div>
+            <div class="neo-card-body" style="font-size: 13px;">
+              Contributed to Song Studio through:<br>
+              • Event photography<br>
+              • Event videography<br>
+              • Highlight reels & mini documentary editing<br>
+              • Poster design & creative documentation.
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-voice">
+            <div class="neo-card-header"><span class="neo-card-title">04 — VOICE LAB</span></div>
+            <div class="neo-card-body" style="font-size: 13px;">
+              Created and revised:<br>
+              • Talking-head videos<br>
+              • Promotional reels<br>
+              • Event content<br>
+              • Promotional graphic assets.
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-studio">
+            <div class="neo-card-header"><span class="neo-card-title">05 — STUDIOWORK</span></div>
+            <div class="neo-card-body" style="font-size: 13px; color: #FFF;">
+              Worked on:<br>
+              • Promotional reels<br>
+              • Event documentation<br>
+              • Poster designs<br>
+              • Documentary video content.
+            </div>
+          </div>
+
+          <div class="neo-card card-theme-mixroom">
+            <div class="neo-card-header"><span class="neo-card-title">06 — MIXROOM</span></div>
+            <div class="neo-card-body" style="font-size: 13px;">
+              Contributed to:<br>
+              • Open Decks poster concepts & wireframes<br>
+              • Promotional reels<br>
+              • Invitation posters<br>
+              • Creative promotional assets.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 08 of 16</span>
+        <span>Major Project Deliverables</span>
+      </div>
+    </section>
+
+    <!-- PAGE 09 — CREATIVE OUTPUTS -->
+    <section class="slide-card" id="slide-9" data-slide="9">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 09 — CREATIVE OUTPUTS</span>
+        <span class="slide-company-tag">SPECTRUM OF WORK</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 12px;">A Range of Creative Work</h2>
+        <p class="slide-subtitle" style="margin-bottom: 24px;">During my OJT, I worked across multiple forms of visual communication.</p>
+
+        <div class="neo-grid-3">
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--orange); font-weight: 700; text-transform: uppercase;">01 / CODE & INTERFACE</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">DIGITAL PRODUCT</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              UI/UX design • Website development • Wireframing • CMS • Responsive design
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--pink); font-weight: 700; text-transform: uppercase;">02 / MOVING IMAGE</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">VIDEO</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Highlight reels • Promotional videos • Documentary edits • Talking-head videos
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink); font-weight: 700; text-transform: uppercase;">03 / VISUAL MEDIA</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">GRAPHIC DESIGN</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Posters • Album artwork • Promotional materials • Marketing collaterals
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--orange); font-weight: 700; text-transform: uppercase;">04 / ANIMATION</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">MOTION</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Teaser motion graphics • Album motion graphics • Moving posters
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--pink); font-weight: 700; text-transform: uppercase;">05 / ARCHIVE</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">DOCUMENTATION</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Event photography • Event videography • Studio photoshoots • Live performances
+            </div>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink); font-weight: 700; text-transform: uppercase;">06 / STRATEGY</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 6px 0 10px 0;">CREATIVE DIRECTION</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Moodboards • Visual concepts • Content planning • Design revisions
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 09 of 16</span>
+        <span>Visual & Digital Communications</span>
+      </div>
+    </section>
+
+    <!-- PAGE 10 — THE HOURS -->
+    <section class="slide-card" id="slide-10" data-slide="10">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 10 — THE HOURS</span>
+        <span class="slide-company-tag">RECORDED ATTENDANCE</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 20px;">Hours Rendered</h2>
+
+        <div class="neo-grid-2" style="align-items: start; gap: 32px;">
+          <div>
+            <table class="hours-table">
+              <thead>
+                <tr>
+                  <th>Period / Week</th>
+                  <th>Dates</th>
+                  <th>Hours Rendered</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Week 1</strong></td>
+                  <td>June 13–14</td>
+                  <td>8 hours</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 2</strong></td>
+                  <td>June 16–21</td>
+                  <td>48 hours 5 mins</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 3</strong></td>
+                  <td>June 30–July 5</td>
+                  <td>43 hours 45 mins</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 4</strong></td>
+                  <td>July 7–12</td>
+                  <td>46 hours 51 mins</td>
+                </tr>
+                <tr>
+                  <td><strong>Week 5</strong></td>
+                  <td>July 14–19</td>
+                  <td>47 hours 39 mins</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="stat-callout">
+              <div>
+                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--ink);">RECORDED TOTAL</div>
+                <div class="stat-callout-num">194h 20m</div>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; background: var(--ink); color: #fff; padding: 6px 14px; border-radius: 999px;">
+                5 WEEKS LOGGED
+              </div>
+            </div>
+
+            <div class="neo-card card-theme-peach">
+              <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--orange); margin-bottom: 6px; text-transform: uppercase;">IMPORTANT NOTE</div>
+              <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.5;">
+                This total only includes the weekly hours recorded above. Additional Week 6 and Week 7 hours should be added once their daily attendance records are available.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 10 of 16</span>
+        <span>Official Attendance Logs</span>
+      </div>
+    </section>
+
+    <!-- PAGE 11 — MY OJT JOURNEY -->
+    <section class="slide-card" id="slide-11" data-slide="11">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 11 — MY OJT JOURNEY</span>
+        <span class="slide-company-tag">GROWTH PATHWAY</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 12px;">From Contributor to Builder</h2>
+        <p class="slide-subtitle" style="margin-bottom: 28px;">My progression across five distinct stages of involvement during OJT.</p>
+
+        <div class="journey-stepper">
+          <div class="journey-node">
+            <span class="journey-node-num">01</span>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800;">START</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Began by supporting event documentation through photography & videography, learning team workflows.
+            </p>
+          </div>
+
+          <div class="journey-node">
+            <span class="journey-node-num">02</span>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800;">EXPLORE</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Gradually took on video editing, website discovery, wireframing, and content planning.
+            </p>
+          </div>
+
+          <div class="journey-node">
+            <span class="journey-node-num">03</span>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800;">BUILD</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Expanded into UI/UX design & active website development for the primary 22 Tango site.
+            </p>
+          </div>
+
+          <div class="journey-node">
+            <span class="journey-node-num">04</span>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800;">EXPAND</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.5;">
+              Contributed across branding, motion graphics, posters, album art, and promotional content.
+            </p>
+          </div>
+
+          <div class="journey-node" style="background: var(--yellow);">
+            <span class="journey-node-num" style="background: var(--ink); color: #fff;">05</span>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 900;">LEAD</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--ink); line-height: 1.5;">
+              Trusted with major digital projects, key website dev work, and the Cattski personal brand site.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 11 of 16</span>
+        <span>5-Stage Professional Evolution</span>
+      </div>
+    </section>
+
+    <!-- PAGE 12 — MY REFLECTION -->
+    <section class="slide-card" id="slide-12" data-slide="12">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 12 — MY REFLECTION</span>
+        <span class="slide-company-tag">PERSONAL TAKEAWAYS</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 20px;">What I Took Away</h2>
+
+        <div class="neo-grid-3" style="margin-bottom: 24px;">
+          <div class="neo-card">
+            <div style="font-family: var(--font-headline); font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 8px;">MORE THAN INTERFACES</div>
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.6;">
+              Being a designer is not only about creating good-looking interfaces. It is about understanding the problem, communicating with people, working within constraints, receiving feedback, making decisions, and delivering something that actually works.
+            </p>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-headline); font-size: 16px; font-weight: 800; color: var(--pink); margin-bottom: 8px;">POWER OF ADAPTABILITY</div>
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.6;">
+              One of the biggest lessons I gained was the importance of adaptability. I had to move seamlessly between UI/UX, web development, video editing, photography, branding, and motion graphics depending on what the project required.
+            </p>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-headline); font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 8px;">BEYOND THE DESIGN FILE</div>
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.6;">
+              Design becomes more valuable when I understand what happens beyond the design file. Working directly with development, content, production, and creative teams helped me see the entire process more clearly.
+            </p>
+          </div>
+        </div>
+
+        <div class="neo-card card-theme-dark" style="text-align: center; padding: 28px 36px; border: 3px solid var(--ink);">
+          <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--yellow); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px;">THE BIGGEST LESSON</div>
+          <div style="font-family: var(--font-headline); font-size: clamp(20px, 3vw, 28px); font-weight: 900; color: #FFF; line-height: 1.3;">
+            "Good design is not just about what I can create. It is about how effectively I can contribute to the problem."
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 12 of 16</span>
+        <span>Reflection & Growth</span>
+      </div>
+    </section>
+
+    <!-- PAGE 13 — REQUIREMENTS -->
+    <section class="slide-card" id="slide-13" data-slide="13">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 13 — REQUIREMENTS</span>
+        <span class="slide-company-tag">ACADEMIC & COMPANY DOCUMENTATION</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 12px;">OJT Requirements</h2>
+        <p class="slide-subtitle" style="margin-bottom: 24px;">Use this page to present the required academic and company documentation.</p>
+
+        <div class="neo-grid-2">
+          <div class="neo-card">
+            <div style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; color: var(--orange); margin-bottom: 14px;">REQUIRED DOCUMENTS</div>
+            <ul style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.8; padding-left: 20px;">
+              <li>OJT application / approval documents</li>
+              <li>Training agreement</li>
+              <li>Weekly accomplishment reports</li>
+              <li>Monthly accomplishment reports</li>
+              <li>Attendance records</li>
+              <li>Evaluation forms</li>
+              <li>Other school-required documents</li>
+            </ul>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-headline); font-size: 20px; font-weight: 800; color: var(--pink); margin-bottom: 14px;">SUPPORTING MATERIALS</div>
+            <ul style="font-family: var(--font-body); font-size: 14px; color: var(--dim); line-height: 1.8; padding-left: 20px;">
+              <li>Project documentation</li>
+              <li>Work samples</li>
+              <li>Event documentation</li>
+              <li>Screenshots of completed projects</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); background: var(--offwhite); padding: 12px 18px; border-radius: 8px; border: 2px solid var(--ink);">
+          Note: Insert the official documents and requirements provided by the school/company. Do not recreate or alter official documents.
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 13 of 16</span>
+        <span>Documentation Index</span>
+      </div>
+    </section>
+
+    <!-- PAGE 14 — ENDORSEMENT LETTER -->
+    <section class="slide-card" id="slide-14" data-slide="14">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 14 — ENDORSEMENT LETTER</span>
+        <span class="slide-company-tag">OFFICIAL ATTACHMENT</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 16px;">Endorsement Letter</h2>
+
+        <div class="doc-placeholder-box">
+          <div class="doc-placeholder-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <div style="font-family: var(--font-headline); font-size: 22px; font-weight: 800; color: var(--ink);">
+            [INSERT OFFICIAL ENDORSEMENT LETTER HERE]
+          </div>
+          <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); max-width: 540px;">
+            Include the official scanned/document version provided by the school. Do not rewrite the letter.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--orange); font-weight: 600;">
+            Preserve: Official wording • Names • Dates • Signatures • Letterhead • School/company info
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 14 of 16</span>
+        <span>Institutional Document</span>
+      </div>
+    </section>
+
+    <!-- PAGE 15 — COMPLETION CERTIFICATE -->
+    <section class="slide-card" id="slide-15" data-slide="15">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 15 — COMPLETION CERTIFICATE</span>
+        <span class="slide-company-tag">OFFICIAL ATTACHMENT</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 16px;">Certificate of Completion</h2>
+
+        <div class="doc-placeholder-box" style="background: #FFF8EE; border-color: var(--orange);">
+          <div class="doc-placeholder-icon" style="background: var(--yellow);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+          </div>
+          <div style="font-family: var(--font-headline); font-size: 22px; font-weight: 800; color: var(--ink);">
+            [INSERT OFFICIAL OJT CERTIFICATE HERE]
+          </div>
+          <p style="font-family: var(--font-body); font-size: 14px; color: var(--dim); max-width: 540px;">
+            Use the official certificate issued by the company or school.
+          </p>
+          <div style="font-family: var(--font-mono); font-size: 12px; color: var(--ink); font-weight: 600;">
+            Preserve original: Certificate layout • Names • Training dates • Company info • Signatures • Seals/logos
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 15 of 16</span>
+        <span>22 Tango Music Group Completion</span>
+      </div>
+    </section>
+
+    <!-- PAGE 16 — OJT DOCUMENTATION -->
+    <section class="slide-card" id="slide-16" data-slide="16">
+      <div class="slide-header-bar">
+        <span class="slide-page-badge">PAGE 16 — OJT DOCUMENTATION</span>
+        <span class="slide-company-tag">BEHIND THE WORK</span>
+      </div>
+
+      <div class="slide-main-content">
+        <h2 class="slide-title-xl" style="font-size: 38px; margin-bottom: 8px;">Behind the Work</h2>
+        <p class="slide-subtitle" style="margin-bottom: 24px;">A visual closing section featuring selected photos and documentation from the OJT.</p>
+
+        <div class="neo-grid-4" style="margin-bottom: 24px;">
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--orange); font-weight: 700;">CATEGORY 01</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 4px 0;">EVENTS</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim);">Song Studio • Voice Lab • Live Performances</p>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--pink); font-weight: 700;">CATEGORY 02</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 4px 0;">PRODUCTION</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim);">Photography • Videography • Video Editing</p>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--ink); font-weight: 700;">CATEGORY 03</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 4px 0;">DESIGN</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim);">UI/UX • Posters • Album Artwork • Motion Graphics</p>
+          </div>
+
+          <div class="neo-card">
+            <div style="font-family: var(--font-mono); font-size: 11px; color: var(--orange); font-weight: 700;">CATEGORY 04</div>
+            <div style="font-family: var(--font-headline); font-size: 18px; font-weight: 800; margin: 4px 0;">DEVELOPMENT</div>
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--dim);">22 Tango Website • Cattski Website</p>
+          </div>
+        </div>
+
+        <div class="neo-card card-theme-dark" style="text-align: center; padding: 24px 32px;">
+          <p style="font-family: var(--font-body); font-size: 16px; color: #FFF; line-height: 1.5; margin-bottom: 12px;">
+            "More than an internship, this was an opportunity to build, create, collaborate, and learn through real work."
+          </p>
+          <div style="font-family: var(--font-headline); font-size: 28px; font-weight: 900; color: var(--yellow);">
+            Thank you.
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-bar">
+        <span>Slide 16 of 16</span>
+        <span>Chaz Grant Borromeo | 22 Tango Music Group</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ③ PRESENTATION CONTROLLER SCRIPT -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 16;
+
+    const slideCards = document.querySelectorAll('.slide-card');
+    const slideSelector = document.getElementById('slideSelector');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const toggleViewBtn = document.getElementById('toggleViewBtn');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+    const progressFill = document.getElementById('progressFill');
+    const deckPageIndicator = document.getElementById('deck-page-indicator');
+
+    function goToSlide(slideNum) {
+      if (slideNum < 1) slideNum = 1;
+      if (slideNum > totalSlides) slideNum = totalSlides;
+
+      currentSlide = slideNum;
+
+      // Update Active Slide Class
+      slideCards.forEach(card => {
+        const s = parseInt(card.getAttribute('data-slide'));
+        card.classList.toggle('active-slide', s === currentSlide);
+      });
+
+      // Update Selector Dropdown & Indicator
+      slideSelector.value = currentSlide;
+      const formattedNum = currentSlide < 10 ? '0' + currentSlide : currentSlide;
+      deckPageIndicator.textContent = `SLIDE ${formattedNum} / ${totalSlides}`;
+
+      // Update Progress Bar
+      const pct = (currentSlide / totalSlides) * 100;
+      progressFill.style.width = pct + '%';
+
+      // Scroll to active slide if in full-scroll mode
+      if (document.body.classList.contains('mode-scroll')) {
+        const activeEl = document.getElementById(`slide-${currentSlide}`);
+        if (activeEl) {
+          activeEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    // Controls listeners
+    prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+    slideSelector.addEventListener('change', (e) => {
+      goToSlide(parseInt(e.target.value));
+    });
+
+    // View Mode Toggle (Deck vs Scroll)
+    toggleViewBtn.addEventListener('click', () => {
+      if (document.body.classList.contains('mode-deck')) {
+        document.body.classList.remove('mode-deck');
+        document.body.classList.add('mode-scroll');
+        toggleViewBtn.textContent = 'Mode: Scroll';
+      } else {
+        document.body.classList.remove('mode-scroll');
+        document.body.classList.add('mode-deck');
+        toggleViewBtn.textContent = 'Mode: Deck';
+        goToSlide(currentSlide);
+      }
+    });
+
+    // Fullscreen Mode Toggle
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Fullscreen error: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    });
+
+    // Keyboard Shortcuts Navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        if (currentSlide < totalSlides) {
+          e.preventDefault();
+          goToSlide(currentSlide + 1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (currentSlide > 1) {
+          e.preventDefault();
+          goToSlide(currentSlide - 1);
+        }
+      }
+    });
+
+    // Initialize Deck
+    goToSlide(1);
+  </script>
+</body>
+
+</html>
