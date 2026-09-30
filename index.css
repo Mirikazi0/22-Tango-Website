@@ -1691,6 +1691,8 @@ img { display: block; max-width: 100%; }
   padding: 0 16px;
   box-sizing: border-box;
 }
+.slide-placeholder,
+.slide-placeholder.scene-slide,
 .slide-placeholder.landscape-slide {
   width: 390px; /* Landscape layout width */
   height: 220px; /* 16:9 visual shape ratio */
@@ -1726,6 +1728,8 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 640px) {
+  .slide-placeholder,
+  .slide-placeholder.scene-slide,
   .slide-placeholder.landscape-slide {
     width: 320px;
     height: 180px;
